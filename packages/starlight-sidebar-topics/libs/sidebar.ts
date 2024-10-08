@@ -25,6 +25,42 @@ export function getCurrentTopic(
   return { config: currentTopicConfig, sidebar: currentSidebarTopic.entries }
 }
 
+export function isTopicFirstPage(sidebar: SidebarEntry[], currentSlug: string): boolean {
+  const currentSidebarTopic = getCurrentSidebarTopic(sidebar)
+  if (!currentSidebarTopic) return false
+
+  const firstPage = getSidebarFirstPage(currentSidebarTopic.entries)
+  if (!firstPage) return false
+
+  return arePathnamesEqual(stripLeadingAndTrailingSlashes(firstPage.href), currentSlug)
+}
+
+export function isTopicLastPage(sidebar: SidebarEntry[], currentSlug: string): boolean {
+  const currentSidebarTopic = getCurrentSidebarTopic(sidebar)
+  if (!currentSidebarTopic) return false
+
+  const lastPage = getSidebarLastPage(currentSidebarTopic.entries)
+  if (!lastPage) return false
+
+  return arePathnamesEqual(stripLeadingAndTrailingSlashes(lastPage.href), currentSlug)
+}
+
+function getSidebarFirstPage(sidebar: SidebarEntry[]) {
+  const entry = sidebar[0]
+  if (!entry) return
+  if (entry.type === 'link') return entry
+
+  return getSidebarFirstPage(entry.entries)
+}
+
+function getSidebarLastPage(sidebar: SidebarEntry[]) {
+  const entry = sidebar.at(-1)
+  if (!entry) return
+  if (entry.type === 'link') return entry
+
+  return getSidebarLastPage(entry.entries)
+}
+
 function getTopicFromSlug(
   config: StarlightSidebarTopicsSharedConfig,
   sidebar: SidebarEntry[],

@@ -39,6 +39,7 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
           components: {
             ...starlightConfig.components,
             ...overrideStarlightComponent(starlightConfig.components, logger, 'Sidebar'),
+            ...overrideStarlightComponent(starlightConfig.components, logger, 'Pagination'),
           },
           sidebar,
         })

@@ -7,6 +7,7 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./overrides/Pagination.astro": "./overrides/Pagination.astro",
     "./overrides/Sidebar.astro": "./overrides/Sidebar.astro",
     "./package.json": "./package.json"
   },
