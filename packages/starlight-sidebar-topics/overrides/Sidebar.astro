@@ -5,15 +5,19 @@ import config from 'virtual:starlight-sidebar-topics-config'
 
 import { getCurrentTopic } from '../libs/sidebar'
 
-const currentTopic = getCurrentTopic(config, Astro.props.sidebar)
+const { entry, sidebar } = Astro.props
 
-if (!currentTopic) {
+let currentSidebar = sidebar
+const currentTopic = getCurrentTopic(config, sidebar)
+
+if (entry['data'].template !== 'splash') {
   // TODO(HiDeoo)
-  throw new Error('No current sidebar topic found')
+  if (!currentTopic) throw new Error('No current sidebar topic found')
+  currentSidebar = currentTopic.sidebar
 }
 
 // FIXME(HiDeoo)
 console.error('🚨 [Sidebar.astro:15] currentTopic:', currentTopic)
 ---
 
-<Default {...Astro.props} sidebar={currentTopic.sidebar}><slot /></Default>
+<Default {...Astro.props} sidebar={currentSidebar}><slot /></Default>
