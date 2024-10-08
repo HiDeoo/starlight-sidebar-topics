@@ -1,8 +1,10 @@
 ---
 import { Icon } from '@astrojs/starlight/components'
+import { AstroError } from 'astro/errors'
 import type { ComponentProps } from 'astro/types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import config from 'virtual:starlight-sidebar-topics-config'
+import starlightConfig from 'virtual:starlight/user-config'
+import config from 'virtual:starlight-sidebar-topics/config'
 
 import type { StarlightSidebarTopicsSharedConfig } from '../libs/config'
 
@@ -20,6 +22,27 @@ const { current } = Astro.props
       const isCurrent = isLinkTopic ? false : topic.label === current.label && topic.link === current.link
       const link =
         !isLinkTopic && Astro.currentLocale ? getRelativeLocaleUrl(Astro.currentLocale, topic.link) : topic.link
+      let label: string
+
+      if (typeof topic.label === 'string') {
+        label = topic.label
+      } else {
+        const defaultLang = starlightConfig.defaultLocale?.lang || starlightConfig.defaultLocale?.locale || 'en'
+        const defaultLabel = topic.label[defaultLang]
+
+        if (!defaultLabel) {
+          throw new AstroError(
+            `The topic label for "${topic.link}" must have a key for the default language "${defaultLang}".`,
+            'Update the Starlight config to include a topic label for the default language.',
+          )
+        }
+
+        label = defaultLabel
+
+        if (Astro.currentLocale) {
+          label = topic.label[Astro.currentLocale] ?? defaultLabel
+        }
+      }
 
       return (
         <li>
@@ -29,7 +52,7 @@ const { current } = Astro.props
                 <Icon name={topic.icon as ComponentProps<typeof Icon>['name']} />
               </span>
             )}
-            {topic.label}
+            {label}
           </a>
         </li>
       )

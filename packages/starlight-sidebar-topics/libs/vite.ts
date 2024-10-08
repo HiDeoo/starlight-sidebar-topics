@@ -2,7 +2,7 @@ import type { ViteUserConfig } from 'astro'
 
 import type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsSharedConfig } from './config'
 
-const moduleId = 'virtual:starlight-sidebar-topics-config'
+const moduleId = 'virtual:starlight-sidebar-topics/config'
 
 export function vitePluginStarlightSidebarTopics(config: StarlightSidebarTopicsConfig): VitePlugin {
   const resolvedModuleId = `\0${moduleId}`

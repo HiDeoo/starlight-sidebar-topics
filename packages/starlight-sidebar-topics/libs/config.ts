@@ -5,7 +5,7 @@ const sidebarTopicBaseSchema = z.object({
   // TODO(HiDeoo) comment
   icon: z.string().optional(),
   // TODO(HiDeoo) comment
-  label: z.string(),
+  label: z.union([z.string(), z.record(z.string())]),
   // TODO(HiDeoo) comment
   link: z.string(),
 })
