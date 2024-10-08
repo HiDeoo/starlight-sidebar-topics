@@ -24,8 +24,10 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
         if (command !== 'dev' && command !== 'build') return
 
         if (starlightConfig.sidebar) {
-          // TODO(HiDeoo)
-          throwPluginError(`Move sidebar config`)
+          throwPluginError(
+            'It looks like you have a `sidebar` configured in your Starlight configuration. To use `starlight-sidebar-topics`, create a new topic with your sidebar items.',
+            'Learn more about topic configuration at https://starlight-sidebar-topics.netlify.app/docs/configuration/',
+          )
         }
 
         const sidebar: StarlightUserConfig['sidebar'] = []

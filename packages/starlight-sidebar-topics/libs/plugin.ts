@@ -2,10 +2,11 @@ import type { StarlightUserConfig } from '@astrojs/starlight/types'
 import type { AstroIntegrationLogger } from 'astro'
 import { AstroError } from 'astro/errors'
 
-export function throwPluginError(message: string): never {
+export function throwPluginError(message: string, hint?: string): never {
   throw new AstroError(
     message,
-    `See the error report above for more informations.\n\nIf you believe this is a bug, please file an issue at https://github.com/HiDeoo/starlight-sidebar-topics/issues/new/choose`,
+    hint ??
+      `See the error report above for more informations.\n\nIf you believe this is a bug, please file an issue at https://github.com/HiDeoo/starlight-sidebar-topics/issues/new/choose`,
   )
 }
 
