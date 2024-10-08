@@ -1,0 +1,19 @@
+---
+import Default from '@astrojs/starlight/components/Sidebar.astro'
+import type { Props } from '@astrojs/starlight/props'
+import config from 'virtual:starlight-sidebar-topics-config'
+
+import { getCurrentTopic } from '../libs/sidebar'
+
+const currentTopic = getCurrentTopic(config, Astro.props.sidebar)
+
+if (!currentTopic) {
+  // TODO(HiDeoo)
+  throw new Error('No current sidebar topic found')
+}
+
+// FIXME(HiDeoo)
+console.error('🚨 [Sidebar.astro:15] currentTopic:', currentTopic)
+---
+
+<Default {...Astro.props} sidebar={currentTopic.sidebar}><slot /></Default>
