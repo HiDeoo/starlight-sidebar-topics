@@ -3,6 +3,8 @@ import { z } from 'astro/zod'
 
 const sidebarTopicBaseSchema = z.object({
   // TODO(HiDeoo) comment
+  icon: z.string().optional(),
+  // TODO(HiDeoo) comment
   label: z.string(),
   // TODO(HiDeoo) comment
   link: z.string(),
