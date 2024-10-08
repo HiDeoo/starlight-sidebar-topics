@@ -34,9 +34,6 @@ function getTranslation(translations: Record<string, string>, link: string, desc
 
   return translation
 }
-
-// TODO(HiDeoo) long topic without space
-// TODO(HiDeoo) long topic + badge
 ---
 
 <ul>
@@ -53,21 +50,23 @@ function getTranslation(translations: Record<string, string>, link: string, desc
         <li>
           <a href={link} class:list={{ highlighted: isCurrent }}>
             {topic.icon && (
-              <span class="starlight-sidebar-topics-icon">
+              <div class="starlight-sidebar-topics-icon">
                 <Icon name={topic.icon as ComponentProps<typeof Icon>['name']} />
-              </span>
+              </div>
             )}
-            {label}
-            {topic.badge && (
-              <Badge
-                text={
-                  typeof topic.badge.text === 'string'
-                    ? topic.badge.text
-                    : getTranslation(topic.badge.text, topic.link, 'topic badge text')
-                }
-                variant={topic.badge.variant}
-              />
-            )}
+            <div>
+              {label}
+              {topic.badge && (
+                <Badge
+                  text={
+                    typeof topic.badge.text === 'string'
+                      ? topic.badge.text
+                      : getTranslation(topic.badge.text, topic.link, 'topic badge text')
+                  }
+                  variant={topic.badge.variant}
+                />
+              )}
+            </div>
           </a>
         </li>
       )
@@ -87,6 +86,10 @@ function getTranslation(translations: Record<string, string>, link: string, desc
     margin-top: 1rem;
     height: 1px;
     border-top: 1px solid var(--sl-color-hairline-light);
+  }
+
+  li {
+    overflow-wrap: anywhere;
   }
 
   li + li {
