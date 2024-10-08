@@ -1,5 +1,5 @@
 ---
-import { Icon } from '@astrojs/starlight/components'
+import { Badge, Icon } from '@astrojs/starlight/components'
 import { AstroError } from 'astro/errors'
 import type { ComponentProps } from 'astro/types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -13,6 +13,30 @@ interface Props {
 }
 
 const { current } = Astro.props
+
+const defaultLang = starlightConfig.defaultLocale?.lang || starlightConfig.defaultLocale?.locale || 'en'
+
+function getTranslation(translations: Record<string, string>, link: string, description: string) {
+  const defaultTranslation = translations[defaultLang]
+
+  if (!defaultTranslation) {
+    throw new AstroError(
+      `The ${description} for "${link}" must have a key for the default language "${defaultLang}".`,
+      'Update the Starlight config to include a topic label for the default language.',
+    )
+  }
+
+  let translation = defaultTranslation
+
+  if (Astro.currentLocale) {
+    translation = translations[Astro.currentLocale] ?? defaultTranslation
+  }
+
+  return translation
+}
+
+// TODO(HiDeoo) long topic without space
+// TODO(HiDeoo) long topic + badge
 ---
 
 <ul>
@@ -22,27 +46,8 @@ const { current } = Astro.props
       const isCurrent = isLinkTopic ? false : topic.label === current.label && topic.link === current.link
       const link =
         !isLinkTopic && Astro.currentLocale ? getRelativeLocaleUrl(Astro.currentLocale, topic.link) : topic.link
-      let label: string
-
-      if (typeof topic.label === 'string') {
-        label = topic.label
-      } else {
-        const defaultLang = starlightConfig.defaultLocale?.lang || starlightConfig.defaultLocale?.locale || 'en'
-        const defaultLabel = topic.label[defaultLang]
-
-        if (!defaultLabel) {
-          throw new AstroError(
-            `The topic label for "${topic.link}" must have a key for the default language "${defaultLang}".`,
-            'Update the Starlight config to include a topic label for the default language.',
-          )
-        }
-
-        label = defaultLabel
-
-        if (Astro.currentLocale) {
-          label = topic.label[Astro.currentLocale] ?? defaultLabel
-        }
-      }
+      const label =
+        typeof topic.label === 'string' ? topic.label : getTranslation(topic.label, topic.link, 'topic label')
 
       return (
         <li>
@@ -53,6 +58,16 @@ const { current } = Astro.props
               </span>
             )}
             {label}
+            {topic.badge && (
+              <Badge
+                text={
+                  typeof topic.badge.text === 'string'
+                    ? topic.badge.text
+                    : getTranslation(topic.badge.text, topic.link, 'topic badge text')
+                }
+                variant={topic.badge.variant}
+              />
+            )}
           </a>
         </li>
       )

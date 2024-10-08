@@ -1,7 +1,17 @@
 import type { StarlightUserConfig } from '@astrojs/starlight/types'
 import { z } from 'astro/zod'
 
+const sidebarTopicBadgeSchema = z.object({
+  text: z.union([z.string(), z.record(z.string())]),
+  variant: z.enum(['note', 'danger', 'success', 'caution', 'tip', 'default']).default('default'),
+})
+
 const sidebarTopicBaseSchema = z.object({
+  // TODO(HiDeoo) comment
+  badge: z
+    .union([z.string(), sidebarTopicBadgeSchema])
+    .transform((badge) => (typeof badge === 'string' ? { variant: 'default' as const, text: badge } : badge))
+    .optional(),
   // TODO(HiDeoo) comment
   icon: z.string().optional(),
   // TODO(HiDeoo) comment
