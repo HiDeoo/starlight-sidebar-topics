@@ -13,14 +13,13 @@ const { current } = Astro.props
 <ul>
   {
     config.map((topic) => {
-      const isLinkTopic = 'link' in topic
-      const link = isLinkTopic ? topic.link : '// TODO(HiDeoo) '
-      // TODO(HiDeoo) compare slugs too
-      const isCurrent = isLinkTopic ? false : topic.label === current.label
+      const isLinkTopic = topic.type === 'link'
+      // TODO(HiDeoo) i18n
+      const isCurrent = isLinkTopic ? false : topic.label === current.label && topic.link === current.link
 
       return (
         <li>
-          <a href={link}>
+          <a href={topic.link}>
             {isCurrent ? '[x] - ' : '[ ] - '}
             {topic.label}
           </a>

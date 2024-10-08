@@ -8,9 +8,9 @@ export function vitePluginStarlightSidebarTopics(config: StarlightSidebarTopicsC
   const resolvedModuleId = `\0${moduleId}`
 
   const sharedConfig: StarlightSidebarTopicsSharedConfig = config.map((topic) => {
-    if ('link' in topic) return topic
+    if (!('items' in topic)) return { ...topic, type: 'link' }
     const { items, ...topicWithoutItems } = topic
-    return topicWithoutItems
+    return { ...topicWithoutItems, type: 'group' }
   })
 
   const moduleContent = `export default ${JSON.stringify(sharedConfig)}`

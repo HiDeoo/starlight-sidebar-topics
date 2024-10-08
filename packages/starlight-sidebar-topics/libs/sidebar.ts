@@ -2,6 +2,7 @@ import type { Props } from '@astrojs/starlight/props'
 import type { StarlightUserConfig } from '@astrojs/starlight/types'
 
 import type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsSharedConfig } from './config'
+import { arePathnamesEqual } from './pathname'
 
 export function getSidebarUserConfig(config: StarlightSidebarTopicsConfig) {
   const sidebar: StarlightUserConfig['sidebar'] = []
@@ -18,20 +19,51 @@ export function getSidebarUserConfig(config: StarlightSidebarTopicsConfig) {
 export function getCurrentTopic(
   config: StarlightSidebarTopicsSharedConfig,
   sidebar: SidebarEntry[],
+  currentSlug: string,
 ): Topic | undefined {
-  const currentSidebarTopic = getCurrentSidebarTopic(sidebar)
+  // Start by checking if the current page is a topic root.
+  const topicFromSlug = getTopicFromSlug(config, sidebar, currentSlug)
+  if (topicFromSlug) return topicFromSlug
 
+  // Otherwise, find the current topic by looking for the current page in the sidebar.
+  const currentSidebarTopic = getCurrentSidebarTopic(sidebar)
   if (!currentSidebarTopic) return
 
-  const topicConfigIndex = Number.parseInt(currentSidebarTopic.label, 10)
-  const topicConfig = config[topicConfigIndex]
+  const currentTopicConfig = config[Number.parseInt(currentSidebarTopic.label, 10)]
+  if (!currentTopicConfig) return
 
-  if (!topicConfig) return
+  return { config: currentTopicConfig, sidebar: currentSidebarTopic.entries }
+}
 
-  return {
-    config: topicConfig,
-    sidebar: currentSidebarTopic.entries,
+function getTopicFromSlug(
+  config: StarlightSidebarTopicsSharedConfig,
+  sidebar: SidebarEntry[],
+  slug: string,
+): Topic | undefined {
+  let topicConfig: Topic['config'] | undefined
+  let topicSidebar: Topic['sidebar'] | undefined
+
+  // Start by checking if the current page is a topic homepage.
+  let groupTopicIndex = -1
+
+  for (const topic of config) {
+    if (topic.type === 'group') groupTopicIndex++
+
+    if (arePathnamesEqual(topic.link, slug) && groupTopicIndex !== -1) {
+      const sidebarTopic = sidebar[groupTopicIndex]
+
+      if (sidebarTopic?.type === 'group') {
+        topicConfig = topic
+        topicSidebar = sidebarTopic.entries
+      }
+
+      break
+    }
   }
+
+  if (!topicConfig || !topicSidebar) return
+
+  return { config: topicConfig, sidebar: topicSidebar }
 }
 
 function getCurrentSidebarTopic(sidebar: SidebarEntry[]): SidebarTopic | undefined {
