@@ -1,0 +1,31 @@
+---
+import config from 'virtual:starlight-sidebar-topics-config'
+
+import type { StarlightSidebarTopicsSharedConfig } from '../libs/config'
+
+interface Props {
+  current: StarlightSidebarTopicsSharedConfig[number]
+}
+
+const { current } = Astro.props
+---
+
+<ul>
+  {
+    config.map((topic) => {
+      const isLinkTopic = 'link' in topic
+      const link = isLinkTopic ? topic.link : '// TODO(HiDeoo) '
+      // TODO(HiDeoo) compare slugs too
+      const isCurrent = isLinkTopic ? false : topic.label === current.label
+
+      return (
+        <li>
+          <a href={link}>
+            {isCurrent ? '[x] - ' : '[ ] - '}
+            {topic.label}
+          </a>
+        </li>
+      )
+    })
+  }
+</ul>

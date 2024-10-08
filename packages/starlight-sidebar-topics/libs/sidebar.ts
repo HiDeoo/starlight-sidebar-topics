@@ -29,7 +29,6 @@ export function getCurrentTopic(
   if (!topicConfig) return
 
   return {
-    // TODO(HiDeoo) Do we really need the config? If not, maybe rename the function
     config: topicConfig,
     sidebar: currentSidebarTopic.entries,
   }
