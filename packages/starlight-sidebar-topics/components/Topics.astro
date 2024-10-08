@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import config from 'virtual:starlight-sidebar-topics-config'
 
 import type { StarlightSidebarTopicsSharedConfig } from '../libs/config'
@@ -14,12 +15,13 @@ const { current } = Astro.props
   {
     config.map((topic) => {
       const isLinkTopic = topic.type === 'link'
-      // TODO(HiDeoo) i18n
       const isCurrent = isLinkTopic ? false : topic.label === current.label && topic.link === current.link
+      const link =
+        !isLinkTopic && Astro.currentLocale ? getRelativeLocaleUrl(Astro.currentLocale, topic.link) : topic.link
 
       return (
         <li>
-          <a href={topic.link}>
+          <a href={link}>
             {isCurrent ? '[x] - ' : '[ ] - '}
             {topic.label}
           </a>

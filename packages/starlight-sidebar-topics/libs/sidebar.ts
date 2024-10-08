@@ -1,20 +1,10 @@
 import type { Props } from '@astrojs/starlight/props'
-import type { StarlightUserConfig } from '@astrojs/starlight/types'
 
-import type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsSharedConfig } from './config'
-import { arePathnamesEqual } from './pathname'
+import type { StarlightSidebarTopicsSharedConfig } from './config'
+import { getLocaleFromSlug, getLocalizedSlug } from './i18n'
+import { arePathnamesEqual, stripLeadingAndTrailingSlashes } from './pathname'
 
-export function getSidebarUserConfig(config: StarlightSidebarTopicsConfig) {
-  const sidebar: StarlightUserConfig['sidebar'] = []
-
-  for (const [index, topic] of config.entries()) {
-    if ('items' in topic) {
-      sidebar.push({ label: String(index), items: topic.items })
-    }
-  }
-
-  return sidebar
-}
+const absoluteLinkRegex = /^https?:\/\//
 
 export function getCurrentTopic(
   config: StarlightSidebarTopicsSharedConfig,
@@ -45,11 +35,16 @@ function getTopicFromSlug(
 
   // Start by checking if the current page is a topic homepage.
   let groupTopicIndex = -1
+  const slugLocale = getLocaleFromSlug(slug)
 
   for (const topic of config) {
     if (topic.type === 'group') groupTopicIndex++
 
-    if (arePathnamesEqual(topic.link, slug) && groupTopicIndex !== -1) {
+    if (
+      !absoluteLinkRegex.test(topic.link) &&
+      arePathnamesEqual(getLocalizedSlug(stripLeadingAndTrailingSlashes(topic.link), slugLocale), slug) &&
+      groupTopicIndex !== -1
+    ) {
       const sidebarTopic = sidebar[groupTopicIndex]
 
       if (sidebarTopic?.type === 'group') {

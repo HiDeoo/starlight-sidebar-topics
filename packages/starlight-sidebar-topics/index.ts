@@ -1,8 +1,7 @@
-import type { StarlightPlugin } from '@astrojs/starlight/types'
+import type { StarlightPlugin, StarlightUserConfig } from '@astrojs/starlight/types'
 
 import { StarlightSidebarTopicsConfigSchema, type StarlightSidebarTopicsUserConfig } from './libs/config'
 import { overrideStarlightComponent, throwPluginError } from './libs/plugin'
-import { getSidebarUserConfig } from './libs/sidebar'
 import { vitePluginStarlightSidebarTopics } from './libs/vite'
 
 export type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsUserConfig } from './libs/config'
@@ -29,12 +28,19 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
           throwPluginError(`Move sidebar config`)
         }
 
+        const sidebar: StarlightUserConfig['sidebar'] = []
+
+        for (const [index, topic] of config.entries()) {
+          if ('items' in topic) {
+            sidebar.push({ label: String(index), items: topic.items })
+          }
+        }
         updateConfig({
           components: {
             ...starlightConfig.components,
             ...overrideStarlightComponent(starlightConfig.components, logger, 'Sidebar'),
           },
-          sidebar: getSidebarUserConfig(config),
+          sidebar,
         })
 
         addIntegration({
