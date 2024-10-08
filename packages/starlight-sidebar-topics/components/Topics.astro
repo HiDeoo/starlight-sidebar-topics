@@ -58,6 +58,7 @@ function getTranslation(translations: Record<string, string>, link: string, desc
               {label}
               {topic.badge && (
                 <Badge
+                  class="starlight-sidebar-topics-badge"
                   text={
                     typeof topic.badge.text === 'string'
                       ? topic.badge.text
@@ -130,5 +131,9 @@ function getTranslation(translations: Record<string, string>, link: string, desc
     background-color: var(--sl-color-text-accent);
     border-color: var(--sl-color-text-accent);
     color: var(--sl-color-text-invert);
+  }
+
+  .starlight-sidebar-topics-badge {
+    margin-inline-start: 0.25em;
   }
 </style>
