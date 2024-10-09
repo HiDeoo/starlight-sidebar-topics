@@ -6,10 +6,6 @@ import starlightSidebarTopics from 'starlight-sidebar-topics'
 export default defineConfig({
   integrations: [
     starlight({
-      locales: {
-        root: { label: 'English', lang: 'en' },
-        fr: { label: 'Français', lang: 'fr' },
-      },
       customCss: ['./src/styles/custom.css'],
       editLink: {
         baseUrl: 'https://github.com/HiDeoo/starlight-sidebar-topics/edit/main/docs/',
@@ -56,6 +52,13 @@ export default defineConfig({
         github: 'https://github.com/HiDeoo/starlight-sidebar-topics',
       },
       title: 'Starlight Sidebar Topics',
+      locales:
+        process.env['NODE_ENV'] === 'test'
+          ? {
+              root: { label: 'English', lang: 'en' },
+              fr: { label: 'Français', lang: 'fr' },
+            }
+          : undefined,
     }),
   ],
   site: 'https://starlight-sidebar-topics.netlify.app',

@@ -48,7 +48,7 @@ function getTranslation(translations: Record<string, string>, link: string, desc
 
       return (
         <li>
-          <a href={link} class:list={{ highlighted: isCurrent }}>
+          <a href={link} class:list={{ 'starlight-sidebar-topics-current': isCurrent }}>
             {topic.icon && (
               <div class="starlight-sidebar-topics-icon">
                 <Icon name={topic.icon as ComponentProps<typeof Icon>['name']} />
@@ -109,11 +109,11 @@ function getTranslation(translations: Record<string, string>, link: string, desc
     text-decoration: none;
   }
 
-  a:is(.highlighted, :hover, :focus-visible) {
+  a:is(.starlight-sidebar-topics-current, :hover, :focus-visible) {
     color: var(--sl-color-accent-high);
   }
 
-  :global([data-theme='light']) a.highlighted {
+  :global([data-theme='light']) a.starlight-sidebar-topics-current {
     color: var(--sl-color-accent);
   }
 
@@ -127,7 +127,7 @@ function getTranslation(translations: Record<string, string>, link: string, desc
     padding: 0.25rem;
   }
 
-  a:is(.highlighted, :hover, :focus-visible) .starlight-sidebar-topics-icon {
+  a:is(.starlight-sidebar-topics-current, :hover, :focus-visible) .starlight-sidebar-topics-icon {
     background-color: var(--sl-color-text-accent);
     border-color: var(--sl-color-text-accent);
     color: var(--sl-color-text-invert);
