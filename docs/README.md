@@ -13,9 +13,13 @@
   <br />
 </div>
 
-## Getting Started
+## Example
 
-Want to get started immediately? Check out the [getting started guide](https://starlight-sidebar-topics.netlify.app/docs/getting-started/).
+Run the docs locally using [pnpm](https://pnpm.io):
+
+```shell
+pnpm run dev
+```
 
 ## License
 
