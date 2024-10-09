@@ -1,1 +1,1 @@
-# starlight-sidebar-topics
+packages/starlight-sidebar-topics/README.md

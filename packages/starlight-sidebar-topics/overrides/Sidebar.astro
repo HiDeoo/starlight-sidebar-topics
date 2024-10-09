@@ -1,0 +1,22 @@
+---
+import Default from '@astrojs/starlight/components/Sidebar.astro'
+import type { Props } from '@astrojs/starlight/props'
+import config from 'virtual:starlight-sidebar-topics/config'
+
+import Topics from '../components/Topics.astro'
+import { throwPluginError } from '../libs/plugin'
+import { getCurrentTopic } from '../libs/sidebar'
+
+const { entry, sidebar, slug } = Astro.props
+
+let currentSidebar = sidebar
+const currentTopic = getCurrentTopic(config, sidebar, slug)
+
+if (entry['data'].template !== 'splash') {
+  if (!currentTopic) throwPluginError('Failed to find the topic for the current page.')
+  currentSidebar = currentTopic.sidebar
+}
+---
+
+{entry['data'].template !== 'splash' && currentTopic && <Topics current={currentTopic.config} />}
+<Default {...Astro.props} sidebar={currentSidebar}><slot /></Default>

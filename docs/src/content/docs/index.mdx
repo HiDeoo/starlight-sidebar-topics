@@ -1,0 +1,42 @@
+---
+title: Starlight Sidebar Topics
+description: Starlight plugin to split your documentation into different sections, each with its own sidebar.
+head:
+  - tag: title
+    content: Starlight Sidebar Topics
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  tagline: Starlight plugin to split your documentation into different sections, each with its own sidebar.
+  image:
+    html: '🧩'
+  actions:
+    - text: Getting Started
+      link: /docs/getting-started/
+      icon: rocket
+    - text: Demo
+      link: /demo/
+      icon: right-arrow
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components'
+
+## Next steps
+
+<CardGrid stagger>
+  <Card title="Install the plugin" icon="puzzle">
+    Check the [getting started guide](/docs/getting-started/) for installation
+    instructions.
+  </Card>
+  <Card title="Configure the plugin" icon="rocket">
+    Edit your config in the `astro.config.mjs` file.
+  </Card>
+  <Card title="Create topics" icon="add-document">
+    Define topics to split your documentation into different sections.
+  </Card>
+  <Card title="Read the docs" icon="open-book">
+    Learn more in the [Starlight Sidebar Topics Docs](/docs/getting-started/).
+  </Card>
+</CardGrid>

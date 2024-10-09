@@ -1,0 +1,19 @@
+---
+import Default from '@astrojs/starlight/components/Pagination.astro'
+import type { Props } from '@astrojs/starlight/props'
+
+import { isTopicFirstPage, isTopicLastPage } from '../libs/sidebar'
+
+const { pagination, sidebar, slug } = Astro.props
+let { prev, next } = pagination
+
+if (isTopicFirstPage(sidebar, slug)) {
+  prev = undefined
+}
+
+if (isTopicLastPage(sidebar, slug)) {
+  next = undefined
+}
+---
+
+<Default {...Astro.props} pagination={{ prev, next }}><slot /></Default>
