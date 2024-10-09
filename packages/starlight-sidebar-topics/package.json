@@ -2,7 +2,7 @@
   "name": "starlight-sidebar-topics",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "// TODO(HiDeoo) ",
+  "description": "Starlight plugin to split your documentation into different sections, each with its own sidebar.",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "exports": {
@@ -30,7 +30,13 @@
   },
   "sideEffects": false,
   "keywords": [
-    "// TODO(HiDeoo) "
+    "starlight",
+    "plugin",
+    "sidebar",
+    "topics",
+    "sections",
+    "documentation",
+    "astro"
   ],
   "homepage": "https://github.com/HiDeoo/starlight-sidebar-topics",
   "repository": {
