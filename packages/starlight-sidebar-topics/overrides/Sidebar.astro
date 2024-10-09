@@ -4,8 +4,8 @@ import type { Props } from '@astrojs/starlight/props'
 import config from 'virtual:starlight-sidebar-topics/config'
 
 import Topics from '../components/Topics.astro'
-import { getCurrentTopic } from '../libs/sidebar'
 import { throwPluginError } from '../libs/plugin'
+import { getCurrentTopic } from '../libs/sidebar'
 
 const { entry, sidebar, slug } = Astro.props
 
