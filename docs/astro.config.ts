@@ -6,6 +6,10 @@ import starlightSidebarTopics from 'starlight-sidebar-topics'
 export default defineConfig({
   integrations: [
     starlight({
+      locales: {
+        root: { label: 'English', lang: 'en' },
+        fr: { label: 'Français', lang: 'fr' },
+      },
       customCss: ['./src/styles/custom.css'],
       editLink: {
         baseUrl: 'https://github.com/HiDeoo/starlight-sidebar-topics/edit/main/docs/',
@@ -13,51 +17,46 @@ export default defineConfig({
       plugins: [
         starlightSidebarTopics([
           {
-            label: 'test 0',
-            link: '',
+            label: 'Documentation',
+            link: '/docs/getting-started/',
+            icon: 'open-book',
+            items: [
+              { label: 'Start Here', items: ['docs/getting-started', 'docs/configuration'] },
+              { label: 'Resources', items: ['docs/resources/starlight'] },
+            ],
           },
           {
-            label: 'test 1',
-            items: [{ slug: '', label: 'test 1 link' }],
+            label: {
+              en: 'Demo',
+              fr: 'Démo',
+            },
+            link: '/demo/',
+            icon: 'puzzle',
+            items: [
+              { label: 'API', autogenerate: { directory: 'demo/api' } },
+              { label: 'Components', autogenerate: { directory: 'demo/components' } },
+              { label: 'Commands', autogenerate: { directory: 'demo/commands' }, collapsed: true },
+            ],
+            badge: {
+              text: {
+                en: 'Stub',
+                fr: 'Ébauche',
+              },
+              variant: 'caution',
+            },
           },
           {
-            label: 'test 2',
-            items: [{ link: '#', label: 'test 2 link' }],
+            label: 'Starlight Docs',
+            link: 'https://starlight.astro.build/',
+            icon: 'starlight',
           },
         ]),
       ],
-      // // FIXME(HiDeoo)
-      // TODO(HiDeoo) use `slug`s
-      // sidebar: [
-      //   {
-      //     label: 'Start Here',
-      //     items: [
-      //       { label: 'Getting Started', link: '/getting-started/' },
-      //       { label: 'Configuration', link: '/configuration/' },
-      //     ],
-      //   },
-      //   {
-      //     label: 'Guides',
-      //     items: [
-      //       { label: 'Frontmatter', link: '/guides/frontmatter/' },
-      //       { label: 'Authors', link: '/guides/authors/' },
-      //       { label: 'RSS', link: '/guides/rss/' },
-      //     ],
-      //   },
-      //   {
-      //     label: 'Resources',
-      //     items: [
-      //       { label: 'Showcase', link: '/resources/showcase/' },
-      //       { label: 'Plugins and Tools', link: '/resources/starlight/' },
-      //     ],
-      //   },
-      //   { label: 'Demo', link: '/blog/' },
-      // ],
       social: {
         github: 'https://github.com/HiDeoo/starlight-sidebar-topics',
       },
       title: 'Starlight Sidebar Topics',
     }),
   ],
-  site: 'https://starlight-sidebar-topics.vercel.app',
+  site: 'https://starlight-sidebar-topics.netlify.app',
 })
