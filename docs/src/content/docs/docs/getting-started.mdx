@@ -28,9 +28,9 @@ import { PackageManagers } from '@hideoo/starlight-plugins-docs-components'
 
    <PackageManagers pkg="starlight-sidebar-topics" />
 
-2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file by creating a new topic containing your existing Starlight [`sidebar`](https://starlight.astro.build/reference/configuration/#sidebar) configuration.
+2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file by specifying an array of topics each with its own sidebar configuration.
 
-   The following example shows how to configure a single topic named "Documentation" linking to the `/docs/` page with your existing sidebar configuration defined using the `items` property:
+   The following example shows how to configure two new topics named "Guides" and "Reference" linking to the `/guides/` and `/reference/` pages respectively with their own sidebar configuration:
 
    ```diff lang="js"
    // astro.config.mjs
@@ -45,18 +45,29 @@ import { PackageManagers } from '@hideoo/starlight-plugins-docs-components'
    +      plugins: [
    +        starlightSidebarTopics([
    +          {
-   +            label: 'Documentation',
-   +            link: '/docs/',
+   +            label: 'Guides',
+   +            link: '/guides/',
    +            icon: 'open-book',
-   +            items: [
-   +              // Your existing sidebar configuration.
-   +            ],
+   +            items: ['guides/getting-started', 'guides/manual-setup'],
+   +          },
+   +          {
+   +            label: 'Reference',
+   +            link: '/reference/',
+   +            icon: 'information',
+   +            items: ['reference/api', 'reference/components'],
    +          },
    +        ]),
    +      ],
    -      sidebar: [
-   -        // Your existing sidebar configuration.
-   -      ]
+   -        {
+   -          label: 'Guides',
+   -          items: ['guides/getting-started', 'guides/manual-setup'],
+   -        },
+   -        {
+   -          label: 'Reference',
+   -          items: ['reference/api', 'reference/components'],
+   -        },
+   -      ],
          title: 'My Docs',
        }),
      ],
