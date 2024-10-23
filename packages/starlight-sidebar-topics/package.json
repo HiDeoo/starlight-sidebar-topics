@@ -9,6 +9,7 @@
     ".": "./index.ts",
     "./overrides/Pagination.astro": "./overrides/Pagination.astro",
     "./overrides/Sidebar.astro": "./overrides/Sidebar.astro",
+    "./schema": "./schema.ts",
     "./package.json": "./package.json"
   },
   "scripts": {

@@ -42,6 +42,11 @@ const sidebarTopicLinkSchema = sidebarTopicBaseSchema
 
 const sidebarTopicGroupSchema = sidebarTopicBaseSchema.extend({
   /**
+   * An optional unique identifier for the topic that can be used to associate content pages that are not listed in any
+   * topic sidebar configuration with this topic.
+   */
+  id: z.string().optional(),
+  /**
    * The sidebar items (links and subcategories) to display for this topic.
    *
    * The topic’s sidebar navigation items. This represents the sidebar displayed when the topic `link` page or any of

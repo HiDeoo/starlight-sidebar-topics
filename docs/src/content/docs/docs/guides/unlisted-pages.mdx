@@ -1,0 +1,93 @@
+---
+title: Unlisted Pages
+description: Learn how to associate content pages that are not listed in any topic sidebar configuration with a specific topic.
+---
+
+By default, the Starlight Sidebar Topics plugin expect that every [content pages](https://starlight.astro.build/guides/pages/#content-pages) in your project is associated with a topic.
+This is done by including the content page in a [topic sidebar configuration](http://localhost:4321/docs/configuration#items) and the plugin will automatically determine which sidebar to display based on the current page.
+
+However, there are cases where you may want to have a content page that is not listed in any topic sidebar while still displaying the sidebar of a specific topic.
+
+## Configure content collections
+
+Starlight is built on top of Astro's [content collections](https://docs.astro.build/en/guides/content-collections/), which are configured in the `src/content/config.ts` file.
+
+To add support for unlisted content pages, update the content config file to add support for associating content pages with a specific topic:
+
+```diff lang=ts ins="{ extend: topicSchema }"
+// src/content/config.ts
+import { defineCollection } from 'astro:content'
+import { docsSchema } from '@astrojs/starlight/schema'
++import { topicSchema } from 'starlight-sidebar-topics/schema'
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema({ extend: topicSchema }) }),
+}
+```
+
+## Create a topic ID
+
+To associate an unlisted content page with a specific topic, the topic must define an [`id`](/docs/configuration#id) in its [configuration](/docs/configuration#topic-configuration):
+
+```js {16-17}
+// astro.config.mjs
+// @ts-check
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import starlightSidebarTopics from 'starlight-sidebar-topics'
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      plugins: [
+        starlightSidebarTopics([
+          {
+            label: 'Guides',
+            icon: 'open-book',
+            link: '/guides/',
+            // ID used to associate content pages with this topic.
+            id: 'guides',
+            items: ['guides/concepts', 'guides/courses'],
+          },
+        ]),
+      ],
+      title: 'My Docs',
+    }),
+  ],
+})
+```
+
+## Associate a page with a topic
+
+To associate an unlisted content page with a specific topic, you can use the `topic` [frontmatter](https://starlight.astro.build/reference/frontmatter/) field in the page's content file:
+
+```md {4}
+---
+# src/content/docs/guides/support.md
+title: Support
+topic: guides
+---
+
+This is the support page.
+```
+
+For example, given the following file structure based on this guide:
+
+import { FileTree } from '@astrojs/starlight/components'
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - concepts.md
+        - courses.md
+        - support.md
+
+</FileTree>
+
+Visiting the `guides/concepts`, `guides/courses`, and `guides/support` pages will all display the sidebar of the "Guides" topic.
+
+- `guides/concepts` and `guides/courses` are explicitly listed in the "Guides" topic sidebar configuration under the [`items`](/docs/configuration#items) key.
+- `guides/support` is not listed in the "Guides" topic sidebar configuration but is associated with the "Guides" topic through the `topic: guides` frontmatter entry.

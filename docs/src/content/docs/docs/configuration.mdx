@@ -113,7 +113,7 @@ This option accepts the same configuration as the [Starlight `sidebar` configura
 ```js {5-11}
 starlightSidebarTopics([
   {
-    label: 'Documentation',
+    label: 'Guides',
     link: '/guides/',
     items: [
       {
@@ -127,6 +127,25 @@ starlightSidebarTopics([
 ```
 
 See the [“Sidebar Navigation”](https://starlight.astro.build/guides/sidebar/) guide in the Starlight docs to learn more about sidebar configuration.
+
+### `id`
+
+**type:** string
+
+An optional unique identifier for the topic that can be used to associate content pages that are not listed in any topic sidebar configuration with this topic.
+
+```js {5}
+starlightSidebarTopics([
+  {
+    label: 'Guides',
+    link: '/guides/',
+    id: 'guides',
+    items: [{ label: 'Start Here', autogenerate: { directory: 'guides' } }],
+  },
+])
+```
+
+See the [“Unlisted Pages”](/docs/guides/unlisted-pages) guide to learn how to associate content pages with a specific topic.
 
 ### `icon`
 

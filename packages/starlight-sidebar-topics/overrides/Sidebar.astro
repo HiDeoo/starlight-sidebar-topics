@@ -5,15 +5,22 @@ import config from 'virtual:starlight-sidebar-topics/config'
 
 import Topics from '../components/Topics.astro'
 import { throwPluginError } from '../libs/plugin'
-import { getCurrentTopic } from '../libs/sidebar'
+import { getCurrentTopic, type Topic } from '../libs/sidebar'
 
 const { entry, sidebar, slug } = Astro.props
 
 let currentSidebar = sidebar
-const currentTopic = getCurrentTopic(config, sidebar, slug)
+let currentTopic: Topic | undefined = undefined
 
 if (entry['data'].template !== 'splash') {
-  if (!currentTopic) throwPluginError('Failed to find the topic for the current page.')
+  currentTopic = getCurrentTopic(config, sidebar, slug, entry)
+  if (!currentTopic)
+    throwPluginError(
+      'Failed to find the topic for the current page.',
+      `Either include the page in the sidebar configuration of the desired topic using the \`items\` property or to associate an unlisted page with a topic, use the \`topic\` frontmatter property and set it to the desired topic ID.
+
+Learn more about unlisted pages in the ["Unlisted pages"](https://starlight-sidebar-topics.netlify.app/docs/guides/unlisted-pages/) guide.`,
+    )
   currentSidebar = currentTopic.sidebar
 }
 ---
