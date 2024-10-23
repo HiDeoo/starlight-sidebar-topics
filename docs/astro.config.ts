@@ -18,10 +18,12 @@ export default defineConfig({
             icon: 'open-book',
             items: [
               { label: 'Start Here', items: ['docs/getting-started', 'docs/configuration'] },
+              { label: 'Guides', autogenerate: { directory: 'docs/guides' } },
               { label: 'Resources', items: ['docs/resources/starlight'] },
             ],
           },
           {
+            id: 'demo',
             label: {
               en: 'Demo',
               fr: 'Démo',
