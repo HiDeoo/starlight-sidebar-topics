@@ -16,8 +16,8 @@ if (entry['data'].template !== 'splash') {
   currentTopic = getCurrentTopic(config, sidebar, slug, entry)
   if (!currentTopic)
     throwPluginError(
-      'Failed to find the topic for the current page.',
-      `Either include the page in the sidebar configuration of the desired topic using the \`items\` property or to associate an unlisted page with a topic, use the \`topic\` frontmatter property and set it to the desired topic ID.
+      `Failed to find the topic for the \`${slug}\` page.`,
+      `Either include this page in the sidebar configuration of the desired topic using the \`items\` property or to associate an unlisted page with a topic, use the \`topic\` frontmatter property and set it to the desired topic ID.
 
 Learn more about unlisted pages in the ["Unlisted pages"](https://starlight-sidebar-topics.netlify.app/docs/guides/unlisted-pages/) guide.`,
     )
