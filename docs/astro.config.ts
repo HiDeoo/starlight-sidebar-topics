@@ -51,6 +51,7 @@ export default defineConfig({
         ]),
       ],
       social: {
+        blueSky: 'https://bsky.app/profile/hideoo.dev',
         github: 'https://github.com/HiDeoo/starlight-sidebar-topics',
       },
       title: 'Starlight Sidebar Topics',
