@@ -1,5 +1,4 @@
 .eslintcache
-.prettierignore
 playwright.config.ts
 test-results/
 tests/

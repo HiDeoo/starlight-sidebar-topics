@@ -14,15 +14,13 @@
   },
   "scripts": {
     "test": "playwright install --with-deps chromium && playwright test",
-    "lint": "eslint . --cache --max-warnings=0",
-    "format": "prettier -w --cache --ignore-unknown ."
+    "lint": "eslint . --cache --max-warnings=0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.48.0",
-    "astro": "^4.15.12"
+    "@playwright/test": "^1.49.1"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.28.0"
+    "@astrojs/starlight": ">=0.30.0"
   },
   "engines": {
     "node": ">=18"
