@@ -1,4 +1,6 @@
+import type { Icon as IconComponent } from '@astrojs/starlight/components'
 import type { StarlightUserConfig } from '@astrojs/starlight/types'
+import type { ComponentProps } from 'astro/types'
 import { z } from 'astro/zod'
 
 const sidebarTopicBadgeSchema = z.object({
@@ -21,7 +23,7 @@ const sidebarTopicBaseSchema = z.object({
    * The name of an optional icon to display before the topic label set to one of Starlight’s built-in icons.
    * @see https://starlight.astro.build/reference/icons/#all-icons
    */
-  icon: z.string().optional(),
+  icon: z.string().optional() as z.Schema<ComponentProps<typeof IconComponent>['name']>,
   /**
    * The topic label visible at the top of the sidebar.
    *
