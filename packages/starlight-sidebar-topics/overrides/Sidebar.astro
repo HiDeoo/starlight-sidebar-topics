@@ -1,29 +1,8 @@
 ---
 import Default from '@astrojs/starlight/components/Sidebar.astro'
-import type { Props } from '@astrojs/starlight/props'
-import config from 'virtual:starlight-sidebar-topics/config'
 
-import Topics from '../components/Topics.astro'
-import { throwPluginError } from '../libs/plugin'
-import { getCurrentTopic, type Topic } from '../libs/sidebar'
-
-const { id, entry, sidebar } = Astro.props
-
-let currentSidebar = sidebar
-let currentTopic: Topic | undefined = undefined
-
-if (entry['data'].template !== 'splash') {
-  currentTopic = getCurrentTopic(config, sidebar, id, entry)
-  if (!currentTopic)
-    throwPluginError(
-      `Failed to find the topic for the \`${id}\` page.`,
-      `Either include this page in the sidebar configuration of the desired topic using the \`items\` property or to associate an unlisted page with a topic, use the \`topic\` frontmatter property and set it to the desired topic ID.
-
-Learn more about unlisted pages in the ["Unlisted pages"](https://starlight-sidebar-topics.netlify.app/docs/guides/unlisted-pages/) guide.`,
-    )
-  currentSidebar = currentTopic.sidebar
-}
+import StarlightSidebarTopicsSidebar from '../components/starlight/Sidebar.astro'
 ---
 
-{entry['data'].template !== 'splash' && currentTopic && <Topics current={currentTopic.config} />}
-<Default {...Astro.props} sidebar={currentSidebar}><slot /></Default>
+<StarlightSidebarTopicsSidebar />
+<Default><slot /></Default>

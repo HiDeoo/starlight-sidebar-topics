@@ -1,4 +1,4 @@
-import type { Props } from '@astrojs/starlight/props'
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 
 import type { TopicFrontmatterSchema } from '../schema'
 
@@ -10,5 +10,5 @@ export function isStarlightEntryWithTopic(entry: StarlightEntry): entry is Starl
   )
 }
 
-export type StarlightEntry = Props['entry']
+export type StarlightEntry = StarlightRouteData['entry']
 export type StarlightEntryWithTopic = StarlightEntry & { data: TopicFrontmatterSchema }

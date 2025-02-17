@@ -19,7 +19,7 @@ export default defineConfig({
             items: [
               { label: 'Start Here', items: ['docs/getting-started', 'docs/configuration'] },
               { label: 'Guides', autogenerate: { directory: 'docs/guides' } },
-              { label: 'Resources', items: ['docs/resources/starlight'] },
+              { label: 'Resources', items: [{ label: 'Plugins and Tools', slug: 'docs/resources/starlight' }] },
             ],
           },
           {
