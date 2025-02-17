@@ -1,6 +1,6 @@
 {
   "name": "starlight-sidebar-topics",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "MIT",
   "description": "Starlight plugin to split your documentation into different sections, each with its own sidebar.",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",

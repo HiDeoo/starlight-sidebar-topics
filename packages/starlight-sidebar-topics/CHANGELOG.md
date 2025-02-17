@@ -1,5 +1,19 @@
 # starlight-sidebar-topics
 
+## 0.4.0
+
+### Minor Changes
+
+- [#16](https://github.com/HiDeoo/starlight-sidebar-topics/pull/16) [`61fee66`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/61fee660dfafff898e5f993ac3b9fe490f88c5cd) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now version `0.32.0`.
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+- [#16](https://github.com/HiDeoo/starlight-sidebar-topics/pull/16) [`61fee66`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/61fee660dfafff898e5f993ac3b9fe490f88c5cd) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The Starlight Sidebar Topics plugin no longer [overrides](https://starlight.astro.build/guides/overriding-components/) the [`<Pagination>` component](https://starlight.astro.build/reference/overrides/#pagination). If you were manually rendering `starlight-sidebar-topics/overrides/Pagination.astro` in a custom override, you can now remove it.
+
 ## 0.3.0
 
 ### Minor Changes
