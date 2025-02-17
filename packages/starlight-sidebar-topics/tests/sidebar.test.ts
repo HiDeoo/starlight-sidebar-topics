@@ -29,7 +29,7 @@ test('uses topic sidebars', async ({ demoPage, docPage }) => {
     'Guides',
     'Unlisted Pages',
     'Resources',
-    'Starlight Plugins and Tools',
+    'Plugins and Tools',
   ])
 
   await demoPage.goto()
