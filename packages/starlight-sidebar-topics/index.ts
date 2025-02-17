@@ -20,7 +20,7 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
   return {
     name: 'starlight-sidebar-topics-plugin',
     hooks: {
-      setup({ addIntegration, command, config: starlightConfig, logger, updateConfig }) {
+      'config:setup'({ addIntegration, addRouteMiddleware, command, config: starlightConfig, logger, updateConfig }) {
         if (command !== 'dev' && command !== 'build') return
 
         if (starlightConfig.sidebar) {
@@ -29,6 +29,8 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
             'Learn more about topic configuration at https://starlight-sidebar-topics.netlify.app/docs/configuration/',
           )
         }
+
+        addRouteMiddleware({ entrypoint: 'starlight-sidebar-topics/middleware' })
 
         const sidebar: StarlightUserConfig['sidebar'] = []
 
@@ -41,7 +43,6 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
           components: {
             ...starlightConfig.components,
             ...overrideStarlightComponent(starlightConfig.components, logger, 'Sidebar'),
-            ...overrideStarlightComponent(starlightConfig.components, logger, 'Pagination'),
           },
           sidebar,
         })

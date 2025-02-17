@@ -7,7 +7,8 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
-    "./overrides/Pagination.astro": "./overrides/Pagination.astro",
+    "./components/Sidebar.astro": "./components/starlight/Sidebar.astro",
+    "./middleware": "./middleware.ts",
     "./overrides/Sidebar.astro": "./overrides/Sidebar.astro",
     "./schema": "./schema.ts",
     "./package.json": "./package.json"
@@ -20,7 +21,7 @@
     "@playwright/test": "^1.49.1"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.30.0"
+    "@astrojs/starlight": ">=0.32.0"
   },
   "engines": {
     "node": ">=18"

@@ -18,7 +18,7 @@ export function overrideStarlightComponent(
   if (components?.[component]) {
     logger.warn(`It looks like you already have a \`${component}\` component override in your Starlight configuration.`)
     logger.warn(
-      `To use \`starlight-sidebar-topics\`, either remove your override or update it to render the content from \`starlight-sidebar-topics/overrides/${component}.astro\`.`,
+      `To use \`starlight-sidebar-topics\`, either remove your override or update it to render the content from \`starlight-sidebar-topics/components/${component}.astro\`.`,
     )
 
     return {}
