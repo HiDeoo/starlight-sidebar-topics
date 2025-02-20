@@ -1,5 +1,11 @@
 # starlight-sidebar-topics
 
+## 0.4.1
+
+### Patch Changes
+
+- [#19](https://github.com/HiDeoo/starlight-sidebar-topics/pull/19) [`3d32f9d`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/3d32f9de841968adc6fcaeefa468db2d01dd975e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with unlisted [custom pages](https://starlight.astro.build/guides/pages/#custom-pages).
+
 ## 0.4.0
 
 ### Minor Changes
