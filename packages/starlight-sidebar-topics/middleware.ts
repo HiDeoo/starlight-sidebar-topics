@@ -7,9 +7,9 @@ import { getCurrentTopic, isTopicFirstPage, isTopicLastPage } from './libs/sideb
 
 export const onRequest = defineRouteMiddleware((context) => {
   const { starlightRoute } = context.locals
-  const { entry, id, pagination, sidebar } = starlightRoute
+  const { entry, hasSidebar, id, pagination, sidebar } = starlightRoute
 
-  if (entry['data'].template !== 'splash') {
+  if (hasSidebar) {
     const currentTopic = getCurrentTopic(config, sidebar, id, entry)
 
     if (!currentTopic)

@@ -42,7 +42,7 @@ test('uses topic sidebars', async ({ demoPage, docPage }) => {
 })
 
 test('supports unlisted pages', async ({ demoPage, docPage }) => {
-  await demoPage.goto('/secret/')
+  await demoPage.goto('/secrets/page/')
 
   expect(await docPage.getSidebarItems()).toEqual(expectedDemoSidebarItems)
 })
