@@ -1,5 +1,15 @@
 # starlight-sidebar-topics
 
+## 0.5.0
+
+### Minor Changes
+
+- [#22](https://github.com/HiDeoo/starlight-sidebar-topics/pull/22) [`0e5806f`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/0e5806fa351ff98ea927fe3c5b245dd28852a3a0) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new [`exclude`](https://starlight-sidebar-topics.netlify.app/docs/configuration#exclude) plugin configuration option to exclude pages from any topic.
+
+  This options can be useful for custom pages that use a custom site navigation sidebar which do not belong to any topic. Excluded pages will use the built-in Starlight sidebar and not render a list of topics.
+
+  See the [“Excluded Pages”](https://starlight-sidebar-topics.netlify.app/docs/guides/excluded-pages) guide to learn more about how to exclude content pages from any topic.
+
 ## 0.4.1
 
 ### Patch Changes
