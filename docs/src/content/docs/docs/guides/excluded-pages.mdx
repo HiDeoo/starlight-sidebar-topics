@@ -1,0 +1,82 @@
+---
+title: Excluded Pages
+description: Learn how to exclude content pages from any topic.
+---
+
+By default, the Starlight Sidebar Topics plugin expect that every pages in your project is associated with a topic.
+This is done by including the page in a [topic sidebar configuration](/docs/configuration#items) or using the `topic` frontmatter field for [unlisted pages](/docs/guides/unlisted-pages/).
+
+However, there are cases where you may have [custom pages](https://starlight.astro.build/guides/pages/#custom-pages) that use a [custom site navigation sidebar](https://starlight.astro.build/guides/pages/#sidebar) which do not belong to any topic.
+Excluding these pages from any topic will prevent the plugin from rendering a list of topics in the sidebar and use the built-in Starlight sidebar instead.
+
+## Exclude pages
+
+To exclude some pages from any topic, you can use the [`exclude`](/docs/configuration#exclude) plugin configuration option.
+
+```js {20}
+// astro.config.mjs
+// @ts-check
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import starlightSidebarTopics from 'starlight-sidebar-topics'
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      plugins: [
+        starlightSidebarTopics(
+          [
+            {
+              label: 'Guides',
+              link: '/guides/',
+              items: ['guides/concepts', 'guides/courses'],
+            },
+          ],
+          {
+            exclude: ['/changelog', '/changelog/**/*'],
+          },
+        ),
+      ],
+      title: 'My Docs',
+    }),
+  ],
+})
+```
+
+For example, given the above configuration and following file structure:
+
+import { FileTree } from '@astrojs/starlight/components'
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - concepts.md
+        - courses.md
+  - pages/
+    - changelog.astro
+    - …
+
+</FileTree>
+
+And the `changelog.astro` page content rendering the following custom page with a custom site navigation sidebar:
+
+```astro title="src/pages/changelog.astro" {3-7}
+<StarlightPage
+  frontmatter={{ title: 'Changelog' }}
+  sidebar={[
+    { label: 'v3.0.0', link: '/changelog/v3-0-0/' },
+    { label: 'v2.0.0', link: '/changelog/v2-0-0/' },
+    { label: 'v1.0.0', link: '/changelog/v1-0-0/' },
+  ]}
+>
+  …
+</StarlightPage>
+```
+
+Visiting the `guides/concepts` and `guides/courses` pages will display the sidebar of the "Guides" topic while the `changelog` page will use the custom site navigation sidebar defined in the `changelog.astro` page using the built-in Starlight sidebar.
+
+- `guides/concepts` and `guides/courses` are explicitly listed in the "Guides" topic sidebar configuration under the [`items`](/docs/configuration#items) key.
+- `changelog` is excluded from any topic using the [`exclude`](/docs/configuration#exclude) plugin configuration option.

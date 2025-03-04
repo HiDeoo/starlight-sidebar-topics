@@ -28,6 +28,7 @@ test('uses topic sidebars', async ({ demoPage, docPage }) => {
     'Configuration',
     'Guides',
     'Unlisted Pages',
+    'Excluded Pages',
     'Resources',
     'Plugins and Tools',
   ])
@@ -42,7 +43,19 @@ test('uses topic sidebars', async ({ demoPage, docPage }) => {
 })
 
 test('supports unlisted pages', async ({ demoPage, docPage }) => {
-  await demoPage.goto('/secrets/page/')
+  await demoPage.goto('/unlisted/page/')
 
   expect(await docPage.getSidebarItems()).toEqual(expectedDemoSidebarItems)
+})
+
+test('supports excluded custom pages with a custom sidebar', async ({ demoPage, docPage }) => {
+  await demoPage.goto('/excluded/custom-page/')
+
+  expect(await docPage.getSidebarItems(true)).toEqual([
+    'Home',
+    'Start Here',
+    'Getting Started',
+    'Configuration',
+    'Demo',
+  ])
 })
