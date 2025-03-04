@@ -17,8 +17,12 @@
     "test": "playwright install --with-deps chromium && playwright test",
     "lint": "eslint . --cache --max-warnings=0"
   },
+  "dependencies": {
+    "picomatch": "^4.0.2"
+  },
   "devDependencies": {
-    "@playwright/test": "^1.49.1"
+    "@playwright/test": "^1.49.1",
+    "@types/picomatch": "^3.0.2"
   },
   "peerDependencies": {
     "@astrojs/starlight": ">=0.32.0"

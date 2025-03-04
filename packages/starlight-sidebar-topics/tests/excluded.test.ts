@@ -1,15 +1,15 @@
 import { expect, test } from './test'
 
 const secretPages = [
-  '/unlisted/page/',
-  '/unlisted/splash/',
-  '/unlisted/custom-page/',
-  '/unlisted/custom-splash/',
-  '/unlisted/custom-no-sidebar/',
+  '/excluded/page/',
+  '/excluded/splash/',
+  '/excluded/custom-page/',
+  '/excluded/custom-splash/',
+  '/excluded/custom-no-sidebar/',
 ]
 
 for (const secretPage of secretPages) {
-  test(`supports unlisted pages: ${secretPage}`, async ({ demoPage }) => {
+  test(`supports excluded pages: ${secretPage}`, async ({ demoPage }) => {
     await demoPage.goto(secretPage)
     await expect(demoPage.page.getByText('This page exists solely for demonstration purposes')).toBeVisible()
   })

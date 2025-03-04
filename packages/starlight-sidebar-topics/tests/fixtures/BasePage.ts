@@ -37,8 +37,9 @@ export class BasePage {
     return locators[0]?.innerText()
   }
 
-  async getSidebarItems() {
-    const [, ...sidebarLists] = await this.#sidebarLists.all()
+  async getSidebarItems(isDefaultSidebar = false) {
+    const allSidebarLists = await this.#sidebarLists.all()
+    const sidebarLists = isDefaultSidebar ? allSidebarLists : allSidebarLists.slice(1)
     const sidebarItems = await Promise.all(
       sidebarLists.map((list) => list.getByRole('listitem').locator(':is(div, a) > span').all()),
     )

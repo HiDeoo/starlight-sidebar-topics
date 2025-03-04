@@ -57,10 +57,30 @@ const sidebarTopicGroupSchema = sidebarTopicBaseSchema.extend({
 
 export const StarlightSidebarTopicsConfigSchema = z.union([sidebarTopicGroupSchema, sidebarTopicLinkSchema]).array()
 
+export const StarlightSidebarTopicsOptionsSchema = z
+  .object({
+    /**
+     * Defines a list of pages or glob patterns that should be excluded from any topic.
+     *
+     * This options can be useful for custom pages that use a custom site navigation sidebar which do not belong to any
+     * topic. Excluded pages will use the built-in Starlight sidebar and not render a list of topics.
+     *
+     * @default []
+     */
+    exclude: z.array(z.string()).default([]),
+  })
+  .strict()
+  .default({})
+
 export type StarlightSidebarTopicsUserConfig = z.input<typeof StarlightSidebarTopicsConfigSchema>
 export type StarlightSidebarTopicsConfig = z.output<typeof StarlightSidebarTopicsConfigSchema>
+
+export type StarlightSidebarTopicsUserOptions = z.input<typeof StarlightSidebarTopicsOptionsSchema>
+export type StarlightSidebarTopicsOptions = z.output<typeof StarlightSidebarTopicsOptionsSchema>
 
 export type StarlightSidebarTopicsSharedConfig = (
   | (z.output<typeof sidebarTopicLinkSchema> & { type: 'link' })
   | (Omit<z.output<typeof sidebarTopicGroupSchema>, 'items'> & { type: 'group' })
 )[]
+
+export type StarlightSidebarTopicsSharedOptions = StarlightSidebarTopicsOptions

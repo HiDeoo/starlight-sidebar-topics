@@ -15,3 +15,8 @@ export function stripTrailingSlash(pathname: string) {
   if (pathname.endsWith('/')) pathname = pathname.slice(0, -1)
   return pathname
 }
+
+export function ensureLeadingSlash(pathname: string): string {
+  if (pathname.startsWith('/')) return pathname
+  return `/${pathname}`
+}

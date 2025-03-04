@@ -1,12 +1,20 @@
 import type { StarlightPlugin, StarlightUserConfig } from '@astrojs/starlight/types'
 
-import { StarlightSidebarTopicsConfigSchema, type StarlightSidebarTopicsUserConfig } from './libs/config'
+import {
+  StarlightSidebarTopicsConfigSchema,
+  StarlightSidebarTopicsOptionsSchema,
+  type StarlightSidebarTopicsUserConfig,
+  type StarlightSidebarTopicsUserOptions,
+} from './libs/config'
 import { overrideStarlightComponent, throwPluginError } from './libs/plugin'
 import { vitePluginStarlightSidebarTopics } from './libs/vite'
 
 export type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsUserConfig } from './libs/config'
 
-export default function starlightSidebarTopicsPlugin(userConfig: StarlightSidebarTopicsUserConfig): StarlightPlugin {
+export default function starlightSidebarTopicsPlugin(
+  userConfig: StarlightSidebarTopicsUserConfig,
+  userOptions?: StarlightSidebarTopicsUserOptions,
+): StarlightPlugin {
   const parsedConfig = StarlightSidebarTopicsConfigSchema.safeParse(userConfig)
 
   if (!parsedConfig.success) {
@@ -15,10 +23,19 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
     )
   }
 
+  const parsedOptions = StarlightSidebarTopicsOptionsSchema.safeParse(userOptions)
+
+  if (!parsedOptions.success) {
+    throwPluginError(
+      `The provided plugin options are invalid.\n${parsedOptions.error.issues.map((issue) => issue.message).join('\n')}`,
+    )
+  }
+
   const config = parsedConfig.data
+  const options = parsedOptions.data
 
   return {
-    name: 'starlight-sidebar-topics-plugin',
+    name: 'starlight-sidebar-topics',
     hooks: {
       'config:setup'({ addIntegration, addRouteMiddleware, command, config: starlightConfig, logger, updateConfig }) {
         if (command !== 'dev' && command !== 'build') return
@@ -30,7 +47,7 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
           )
         }
 
-        addRouteMiddleware({ entrypoint: 'starlight-sidebar-topics/middleware' })
+        addRouteMiddleware({ entrypoint: 'starlight-sidebar-topics/middleware', order: 'pre' })
 
         const sidebar: StarlightUserConfig['sidebar'] = []
 
@@ -51,7 +68,7 @@ export default function starlightSidebarTopicsPlugin(userConfig: StarlightSideba
           name: 'starlight-sidebar-topics-integration',
           hooks: {
             'astro:config:setup': ({ updateConfig }) => {
-              updateConfig({ vite: { plugins: [vitePluginStarlightSidebarTopics(config)] } })
+              updateConfig({ vite: { plugins: [vitePluginStarlightSidebarTopics(config, options)] } })
             },
           },
         })

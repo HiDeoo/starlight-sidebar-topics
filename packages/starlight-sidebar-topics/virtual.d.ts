@@ -3,3 +3,9 @@ declare module 'virtual:starlight-sidebar-topics/config' {
 
   export default StarlightSidebarTopicsConfig
 }
+
+declare module 'virtual:starlight-sidebar-topics/options' {
+  const StarlightSidebarTopicsOptions: import('./libs/config').StarlightSidebarTopicsSharedOptions
+
+  export default StarlightSidebarTopicsOptions
+}

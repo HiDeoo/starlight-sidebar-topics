@@ -5,7 +5,7 @@ description: An overview of the configuration options supported by the Starlight
 
 The Starlight Sidebar Topics can be configured inside the `astro.config.mjs` configuration file of your project:
 
-```js {12}
+```js {13,16}
 // astro.config.mjs
 // @ts-check
 import starlight from '@astrojs/starlight'
@@ -16,9 +16,14 @@ export default defineConfig({
   integrations: [
     starlight({
       plugins: [
-        starlightSidebarTopics([
-          // Topics configuration goes here.
-        ]),
+        starlightSidebarTopics(
+          [
+            // Topics configuration goes here.
+          ],
+          {
+            // Plugin configuration goes here (optional).
+          },
+        ),
       ],
       title: 'My Docs',
     }),
@@ -180,3 +185,42 @@ starlightSidebarTopics([
   },
 ])
 ```
+
+## Plugin configuration
+
+The Starlight Sidebar Topics plugin accepts an optional configuration object as the second argument.
+
+The configuration object can be used to customize the plugin global behavior and the following options are available:
+
+### `exclude`
+
+**type:** `string[]`  
+**default:** `[]`
+
+A list of pages or [glob patterns](https://github.com/micromatch/picomatch#globbing-features) that should be excluded from any topic.
+
+This options can be useful for [custom pages](https://starlight.astro.build/guides/pages/#custom-pages) that use a [custom site navigation sidebar](https://starlight.astro.build/guides/pages/#sidebar) which do not belong to any topic.
+Excluded pages will use the built-in Starlight sidebar and not render a list of topics.
+
+The following example excludes all pages under the `/blog` directory from any topic:
+
+```js {10}
+starlightSidebarTopics(
+  [
+    {
+      label: 'Guides',
+      link: '/guides/',
+      items: ['guides/concepts', 'guides/courses'],
+    },
+  ],
+  {
+    exclude: ['/blog', '/blog/**/*'],
+  },
+)
+```
+
+See the [“Excluded Pages”](/docs/guides/excluded-pages) guide to learn how to exclude content pages from any topic.
+
+:::tip
+You can use this [webpage](https://www.digitalocean.com/community/tools/glob) to generate and test glob patterns.
+:::

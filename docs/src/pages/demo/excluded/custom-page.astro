@@ -1,0 +1,29 @@
+---
+import { Aside } from '@astrojs/starlight/components'
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+---
+
+<StarlightPage
+  frontmatter={{ title: 'Custom - Excluded without sidebar' }}
+  sidebar={[
+    { label: 'Home', link: '/' },
+    {
+      label: 'Start Here',
+      items: ['docs/getting-started', 'docs/configuration'],
+    },
+    { label: 'Demo', link: '/demo/' },
+  ]}
+>
+  <p>
+    This custom page with a custom <code>sidebar</code> is not listed in any topic sidebar configuration, is not associated
+    with any topic through the <code>topic</code> frontmatter field, and is also excluded in the plugin configuration.
+  </p>
+  <p>
+    See the <a href="/docs/guides/excluded-pages/">“Excluded Pages”</a> guide to learn how to exclude content pages from
+    any topic.
+  </p>
+  <Aside>
+    This page exists solely for demonstration purposes and contains no useful information. See the Starlight Sidebar
+    Topics plugin <a href="/docs/getting-started/">documentation</a> for more information.
+  </Aside>
+</StarlightPage>

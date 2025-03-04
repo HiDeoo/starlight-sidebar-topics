@@ -3,10 +3,11 @@ import { Aside } from '@astrojs/starlight/components'
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
 ---
 
-<StarlightPage frontmatter={{ title: 'Custom - Secrets without sidebar', template: 'splash' }}>
+<StarlightPage frontmatter={{ title: 'Custom - Excluded without sidebar' }} sidebar={[]} hasSidebar={false}>
   <p>
-    This custom page using the <code>splash</code> template is not listed in any topic sidebar configuration and is not associated
-    with any topic through the <code>topic</code> frontmatter field.
+    This custom page with <code>hasSidebar</code> set to <code>false</code> is not listed in any topic sidebar configuration,
+    is not associated with any topic through the <code>topic</code> frontmatter field, and is also excluded in the plugin
+    configuration.
   </p>
   <Aside>
     This page exists solely for demonstration purposes and contains no useful information. See the Starlight Sidebar
