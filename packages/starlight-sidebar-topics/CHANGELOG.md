@@ -1,5 +1,11 @@
 # starlight-sidebar-topics
 
+## 0.5.1
+
+### Patch Changes
+
+- [#25](https://github.com/HiDeoo/starlight-sidebar-topics/pull/25) [`ca87a7b`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/ca87a7b7b1f945d7b1aeab07576a2cbfb3040156) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds the `.starlight-sidebar-topics` CSS class around the sidebar topics list to make it easier to style it.
+
 ## 0.5.0
 
 ### Minor Changes
