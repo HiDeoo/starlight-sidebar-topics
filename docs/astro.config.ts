@@ -52,6 +52,9 @@ export default defineConfig({
           ],
           {
             exclude: ['/demo/excluded/**/*', '/*/demo/excluded/**/*'],
+            topics: {
+              demo: ['/demo/unlisted/topics', '/*/demo/unlisted/topics'],
+            },
           },
         ),
       ],

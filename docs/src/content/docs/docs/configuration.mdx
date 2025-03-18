@@ -199,10 +199,10 @@ The configuration object can be used to customize the plugin global behavior and
 
 A list of pages or [glob patterns](https://github.com/micromatch/picomatch#globbing-features) that should be excluded from any topic.
 
-This options can be useful for [custom pages](https://starlight.astro.build/guides/pages/#custom-pages) that use a [custom site navigation sidebar](https://starlight.astro.build/guides/pages/#sidebar) which do not belong to any topic.
+This option can be useful for [custom pages](https://starlight.astro.build/guides/pages/#custom-pages) that use a [custom site navigation sidebar](https://starlight.astro.build/guides/pages/#sidebar) which do not belong to any topic.
 Excluded pages will use the built-in Starlight sidebar and not render a list of topics.
 
-The following example excludes all pages under the `/blog` directory from any topic:
+The following example excludes all pages under the `/blog/` directory from any topic:
 
 ```js {10}
 starlightSidebarTopics(
@@ -220,6 +220,41 @@ starlightSidebarTopics(
 ```
 
 See the [“Excluded Pages”](/docs/guides/excluded-pages) guide to learn how to exclude content pages from any topic.
+
+:::tip
+You can use this [webpage](https://www.digitalocean.com/community/tools/glob) to generate and test glob patterns.
+:::
+
+### `topics`
+
+**type:** `Record<string, string[]>`  
+**default:** `{}`
+
+A map of [topic identifiers](#id) to a list of pages or [glob patterns](https://github.com/micromatch/picomatch#globbing-features) that should be associated with the topic.
+
+This option can be useful for [custom pages](https://starlight.astro.build/guides/pages/#custom-pages) generated and included in the sidebar by other plugins that have no knowledge of the Starlight Sidebar Topics plugin that should be associated with a specific topic.
+
+The following example associates all pages under the `/reference/api/` directory with the `reference` topic:
+
+```js {11-13} /(reference)(?::|')/
+starlightSidebarTopics(
+  [
+    {
+      label: 'Reference',
+      id: 'reference',
+      link: '/reference/',
+      items: ['reference/configuration'],
+    },
+  ],
+  {
+    topics: {
+      reference: ['/reference/api', '/reference/api/**/*'],
+    },
+  },
+)
+```
+
+See the [“Unlisted Pages”](/docs/guides/unlisted-pages) guide to learn how to associate pages with a specific topic.
 
 :::tip
 You can use this [webpage](https://www.digitalocean.com/community/tools/glob) to generate and test glob patterns.
