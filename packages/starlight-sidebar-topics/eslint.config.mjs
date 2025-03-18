@@ -14,4 +14,10 @@ export default hideoo(
       'unicorn/prefer-dom-node-text-content': 'off',
     },
   },
+  {
+    files: ['index.ts'],
+    rules: {
+      '@typescript-eslint/triple-slash-reference': 'off',
+    },
+  },
 )

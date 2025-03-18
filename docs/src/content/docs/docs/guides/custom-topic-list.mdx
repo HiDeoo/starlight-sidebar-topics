@@ -1,0 +1,169 @@
+---
+title: Custom Topic List
+description: Learn how to create a custom topic list using the Starlight Sidebar Topics plugin.
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+By default, the Starlight Sidebar Topics plugin [overrides](https://starlight.astro.build/guides/overriding-components/) the Starlight built-in [`<Sidebar>`](https://starlight.astro.build/reference/overrides/#sidebar) component to display a list of topics above the default sidebar content.
+
+The plugin also exposes a route data object that contains all the information required to render a custom topic list in your project.
+
+## What is route data?
+
+Similar to [Starlight route data](https://starlight.astro.build/guides/route-data/), the route data provided by the Starlight Sidebar Topics plugin is an object containing the information about all the configured topics in your project.
+It includes information like a list of all the topics, the label of each topic, and if the current page is part of a specific topic.
+
+To learn more about all the available properties in the route data object, check the [`starlightSidebarTopics`](#starlightsidebartopics) section.
+
+## Using route data
+
+You can access the route data object provided by the Starlight Sidebar Topics plugin from the `Astro.locals.starlightSidebarTopics` global in Astro components:
+
+```astro
+---
+// example.astro
+const { topics } = Astro.locals.starlightSidebarTopics
+//        ^ The list of all the topics in your project.
+---
+```
+
+## Create a custom topic list
+
+A custom topic list can be created using the route data object provided by the Starlight Sidebar Topics plugin.
+
+import { Steps } from '@astrojs/starlight/components'
+import CustomTopicListPreview from '../../../../components/CustomTopicListPreview.astro'
+
+<Steps>
+
+1. Prevent the Starlight Sidebar Topics plugin from rendering the built-in topic list by [overriding](https://starlight.astro.build/guides/overriding-components/#how-to-override) the `<Sidebar>` component in `astro.config.mjs`:
+
+   ```js {10-13}
+   // astro.config.mjs
+   // @ts-check
+   import { defineConfig } from 'astro/config'
+   import starlight from '@astrojs/starlight'
+
+   export default defineConfig({
+     integrations: [
+       starlight({
+         title: 'My Docs',
+         components: {
+           // Override the `<Sidebar>` component.
+           Sidebar: './src/components/Sidebar.astro',
+         },
+       }),
+     ],
+   })
+   ```
+
+1. Create an Astro component for the `<Sidebar>` component override:
+
+   This component can render anything you want, or only [reuse](https://starlight.astro.build/guides/overriding-components/#reuse-a-built-in-component) the default Starlight built-in `<Sidebar>` component.
+
+   ```astro
+   ---
+   // src/components/Sidebar.astro
+   import Default from '@astrojs/starlight/components/Sidebar.astro'
+   ---
+
+   <Default><slot /></Default>
+   ```
+
+1. Create an Astro component to replace the topic list based on the [`Astro.locals.starlightSidebarTopics`](#starlightsidebartopics) route data object:
+
+   ```astro
+   ---
+   // docs/src/components/CustomTopicList.astro
+   const { topics } = Astro.locals.starlightSidebarTopics
+   ---
+
+   <nav>
+     {
+       topics.map((topic) => (
+         <a href={topic.link} aria-current={topic.isCurrent ? 'page' : false}>
+           {topic.label}
+         </a>
+       ))
+     }
+   </nav>
+   ```
+
+   The basic example above iterates over all the topics in the route data object and renders a list of links to each topic:
+
+   <CustomTopicListPreview />
+
+   Up to you to customize the list as you want to match the look and feel of your project.
+
+1. Choose the Starlight component that should be [overridden](https://starlight.astro.build/guides/overriding-components/#how-to-override) to render your custom topic list.
+   You can find a full list of components in the Starlight [Overrides Reference](https://starlight.astro.build/reference/overrides/).
+
+   :::tip
+   Not sure which component you need to override? Use the [interactive Starlight Overrides Map](https://starlight-overrides-map.netlify.app/) to discover the names of Starlight’s UI components.
+   :::
+
+   The following example overrides the [`<SiteTitle>`](https://starlight.astro.build/reference/overrides/#sitetitle) component to render the custom topic list next to the site title in the header
+
+   ```astro
+   ---
+   // src/components/SiteTitle.astro
+   import Default from '@astrojs/starlight/components/SiteTitle.astro'
+   import CustomTopicList from './CustomTopicList.astro'
+   ---
+
+   {/* Render the default site title. */}
+   <Default><slot /></Default>
+   {/* Render the custom topic list. */}
+   <CustomTopicList />
+   ```
+
+</Steps>
+
+## `starlightSidebarTopics`
+
+The `starlightSidebarTopics` object has the following properties:
+
+### `topics`
+
+A list of all the configured topics in your project.
+
+Each topic object has the following properties:
+
+#### `label`
+
+**type:** `string`
+
+The label of the topic.
+
+#### `link`
+
+**type:** `string`
+
+The link to the topic’s content.
+
+#### `isCurrent`
+
+**type:** `boolean`
+
+Indicates if the current page is part of the topic.
+
+#### `icon`
+
+**type:** `string | undefined`
+
+The name of an optional icon associated with the topic set to one of Starlight’s built-in icons.
+You can use the Starlight [`<Icon>`](https://starlight.astro.build/components/icons/) component to render the icon.
+
+#### `badge`
+
+**type:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default' } | undefined`
+
+The optional badge associated with the topic.
+You can use the Starlight [`<Badge>`](https://starlight.astro.build/components/badges/) component to render the badge.
+
+### `isPageWithTopic`
+
+**type:** `boolean`
+
+Indicates if the current page is associated with a topic or not.

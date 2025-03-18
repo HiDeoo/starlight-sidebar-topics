@@ -68,6 +68,15 @@ export const StarlightSidebarTopicsOptionsSchema = z
      * @default []
      */
     exclude: z.array(z.string()).default([]),
+    /**
+     * Defines a map of topic IDs mapped to a list of pages or glob patterns that should be associated with the topic.
+     *
+     * This option can be useful for custom pages generated and included in the sidebar by other plugins that have no
+     * knowledge of the Starlight Sidebar Topics plugin that should be associated with a specific topic.
+     *
+     * @default {}
+     */
+    topics: z.record(z.array(z.string())).default({}),
   })
   .strict()
   .default({})
@@ -84,3 +93,5 @@ export type StarlightSidebarTopicsSharedConfig = (
 )[]
 
 export type StarlightSidebarTopicsSharedOptions = StarlightSidebarTopicsOptions
+
+export type SidebarTopicBadge = z.output<typeof sidebarTopicBadgeSchema>

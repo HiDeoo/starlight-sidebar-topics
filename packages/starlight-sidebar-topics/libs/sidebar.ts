@@ -103,7 +103,7 @@ function getTopicFromSlug(
   return { config: topicConfig, sidebar: topicSidebar }
 }
 
-function getTopicById(
+export function getTopicById(
   config: StarlightSidebarTopicsSharedConfig,
   sidebar: SidebarEntry[],
   id: string,

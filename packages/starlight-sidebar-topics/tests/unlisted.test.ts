@@ -3,6 +3,7 @@ import { expect, test } from './test'
 const secretPages = [
   '/unlisted/page/',
   '/unlisted/splash/',
+  '/unlisted/topics/',
   '/unlisted/custom-page/',
   '/unlisted/custom-splash/',
   '/unlisted/custom-no-sidebar/',
