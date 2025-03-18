@@ -1,11 +1,8 @@
 ---
-import { StarlightSidebarTopicsLocalsSymbol, type StarlightSidebarTopicsLocals } from '../../libs/locals'
 import Topics from '../Topics.astro'
 
 const { hasSidebar } = Astro.locals.starlightRoute
-
-// @ts-expect-error - See `libs/locals` for more information.
-const currentTopic = Astro.locals[StarlightSidebarTopicsLocalsSymbol] as StarlightSidebarTopicsLocals
+const { isPageWithTopic } = Astro.locals.starlightSidebarTopics
 ---
 
-{hasSidebar && currentTopic && <Topics current={currentTopic.config} />}
+{hasSidebar && isPageWithTopic && <Topics />}

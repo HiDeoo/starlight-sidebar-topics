@@ -1,3 +1,5 @@
+/// <reference path="./locals.d.ts" />
+
 import type { StarlightPlugin, StarlightUserConfig } from '@astrojs/starlight/types'
 
 import {
@@ -6,7 +8,7 @@ import {
   type StarlightSidebarTopicsUserConfig,
   type StarlightSidebarTopicsUserOptions,
 } from './libs/config'
-import { overrideStarlightComponent, throwPluginError } from './libs/plugin'
+import { throwPluginError } from './libs/plugin'
 import { vitePluginStarlightSidebarTopics } from './libs/vite'
 
 export type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsUserConfig } from './libs/config'
@@ -37,7 +39,7 @@ export default function starlightSidebarTopicsPlugin(
   return {
     name: 'starlight-sidebar-topics',
     hooks: {
-      'config:setup'({ addIntegration, addRouteMiddleware, command, config: starlightConfig, logger, updateConfig }) {
+      'config:setup'({ addIntegration, addRouteMiddleware, command, config: starlightConfig, updateConfig }) {
         if (command !== 'dev' && command !== 'build') return
 
         if (starlightConfig.sidebar) {
@@ -58,8 +60,8 @@ export default function starlightSidebarTopicsPlugin(
         }
         updateConfig({
           components: {
+            Sidebar: `starlight-sidebar-topics/overrides/Sidebar.astro`,
             ...starlightConfig.components,
-            ...overrideStarlightComponent(starlightConfig.components, logger, 'Sidebar'),
           },
           sidebar,
         })

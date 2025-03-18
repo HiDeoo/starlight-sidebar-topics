@@ -93,3 +93,5 @@ export type StarlightSidebarTopicsSharedConfig = (
 )[]
 
 export type StarlightSidebarTopicsSharedOptions = StarlightSidebarTopicsOptions
+
+export type SidebarTopicBadge = z.output<typeof sidebarTopicBadgeSchema>

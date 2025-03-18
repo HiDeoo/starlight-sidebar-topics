@@ -29,6 +29,7 @@ test('uses topic sidebars', async ({ demoPage, docPage }) => {
     'Guides',
     'Unlisted Pages',
     'Excluded Pages',
+    'Custom Topic List',
     'Resources',
     'Plugins and Tools',
   ])
