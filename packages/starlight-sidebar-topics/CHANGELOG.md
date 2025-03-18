@@ -1,5 +1,19 @@
 # starlight-sidebar-topics
 
+## 0.6.0
+
+### Minor Changes
+
+- [#29](https://github.com/HiDeoo/starlight-sidebar-topics/pull/29) [`5c337bc`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/5c337bc67ce2131e20408d213f876a5a96543f3e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a route data object accessible on Starlight pages using `Astro.locals.starlightSidebarTopics` containing information about all the topics configured in your project. This can be useful to create custom topic lists to replace the built-in topic list.
+
+  See the [“Custom Topic List” guide](https://starlight-sidebar-topics.netlify.app/docs/guides/custom-topic-list/) for more information.
+
+- [#29](https://github.com/HiDeoo/starlight-sidebar-topics/pull/29) [`5c337bc`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/5c337bc67ce2131e20408d213f876a5a96543f3e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new [`topics`](https://starlight-sidebar-topics.netlify.app/docs/configuration#topics) plugin configuration option to map topic identifiers to a list of pages or glob patterns that should be associated with the topic.
+
+  This option can be useful for custom pages generated and included in the sidebar by other plugins that have no knowledge of the Starlight Sidebar Topics plugin that should be associated with a specific topic.
+
+  See the [“Unlisted Pages”](https://starlight-sidebar-topics.netlify.app/docs/guides/unlisted-pages) guide to learn more about how to associate pages with a specific topic.
+
 ## 0.5.1
 
 ### Patch Changes
