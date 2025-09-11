@@ -1,5 +1,4 @@
-import type { Icon } from '@astrojs/starlight/components'
-import type { ComponentProps } from 'astro/types'
+import type { StarlightIcon } from '@astrojs/starlight/types'
 
 import type { SidebarTopicBadge } from './libs/config'
 
@@ -22,7 +21,7 @@ export interface StarlightSidebarTopicsRouteData {
     /**
      * The name of an optional icon associated with the topic set to one of Starlight’s built-in icons.
      */
-    icon?: ComponentProps<typeof Icon>['name']
+    icon?: StarlightIcon
     /**
      * Indicates if the current page is part of the topic.
      */
