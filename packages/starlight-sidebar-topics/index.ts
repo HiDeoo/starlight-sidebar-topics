@@ -11,7 +11,7 @@ import {
 import { throwPluginError } from './libs/plugin'
 import { vitePluginStarlightSidebarTopics } from './libs/vite'
 
-export type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsUserConfig } from './libs/config'
+export type { StarlightSidebarTopicsConfig, StarlightSidebarTopicsUserConfig, StarlightSidebarTopicsUserOptions  } from './libs/config'
 
 export default function starlightSidebarTopicsPlugin(
   userConfig: StarlightSidebarTopicsUserConfig,
