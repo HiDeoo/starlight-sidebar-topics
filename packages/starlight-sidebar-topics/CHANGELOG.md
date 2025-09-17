@@ -1,5 +1,13 @@
 # starlight-sidebar-topics
 
+## 0.6.1
+
+### Patch Changes
+
+- [#41](https://github.com/HiDeoo/starlight-sidebar-topics/pull/41) [`cc18784`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/cc18784084031d502674cf7d1b5949ce906c5cb8) Thanks [@InertSloth](https://github.com/InertSloth)! - Exports the `StarlightSidebarTopicsUserOptions` type matching the [plugin configuration object](https://starlight-sidebar-topics.netlify.app/docs/configuration/#plugin-configuration).
+
+- [#37](https://github.com/HiDeoo/starlight-sidebar-topics/pull/37) [`c45840c`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/c45840cff23701ccb34c02a8ae0b7bbc00cf282c) Thanks [@angelikatyborska](https://github.com/angelikatyborska)! - Fixes a potential type issue for users manually running `tsc` in their projects.
+
 ## 0.6.0
 
 ### Minor Changes
