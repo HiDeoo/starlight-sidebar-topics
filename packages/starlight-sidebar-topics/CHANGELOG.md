@@ -1,5 +1,11 @@
 # starlight-sidebar-topics
 
+## 0.6.2
+
+### Patch Changes
+
+- [#48](https://github.com/HiDeoo/starlight-sidebar-topics/pull/48) [`e5163eb`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/e5163eb17f1fdcafa73339fcece28166d7a8aa55) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Setups trusted publishing using OpenID Connect (OIDC) authentication — no code changes.
+
 ## 0.6.1
 
 ### Patch Changes
