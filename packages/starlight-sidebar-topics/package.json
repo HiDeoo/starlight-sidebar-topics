@@ -9,6 +9,7 @@
     ".": "./index.ts",
     "./components/Sidebar.astro": "./components/starlight/Sidebar.astro",
     "./libs/middlewareAutoSidebar": "./libs/middlewareAutoSidebar.ts",
+    "./middleware": "./middleware.ts",
     "./overrides/Sidebar.astro": "./overrides/Sidebar.astro",
     "./schema": "./schema.ts",
     "./package.json": "./package.json"
