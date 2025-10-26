@@ -3,6 +3,10 @@ import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
 import starlightSidebarTopics from 'starlight-sidebar-topics'
 
+const site =
+  (process.env['CONTEXT'] === 'production' ? process.env['URL'] : process.env['DEPLOY_PRIME_URL']) ??
+  'https://starlight-sidebar-topics.netlify.app/'
+
 export default defineConfig({
   integrations: [
     starlight({
@@ -10,6 +14,19 @@ export default defineConfig({
       editLink: {
         baseUrl: 'https://github.com/HiDeoo/starlight-sidebar-topics/edit/main/docs/',
       },
+      head: [
+        {
+          tag: 'meta',
+          attrs: { property: 'og:image', content: new URL('og.jpg', site).href },
+        },
+        {
+          tag: 'meta',
+          attrs: {
+            property: 'og:image:alt',
+            content: 'Starlight plugin to split your documentation into different sections, each with its own sidebar.',
+          },
+        },
+      ],
       plugins: [
         starlightSidebarTopics(
           [
@@ -72,5 +89,5 @@ export default defineConfig({
           : undefined,
     }),
   ],
-  site: 'https://starlight-sidebar-topics.netlify.app',
+  site,
 })
