@@ -8,7 +8,7 @@
   "exports": {
     ".": "./index.ts",
     "./components/Sidebar.astro": "./components/starlight/Sidebar.astro",
-    "./middleware": "./middleware.ts",
+    "./libs/middlewareAutoSidebar": "./libs/middlewareAutoSidebar.ts",
     "./overrides/Sidebar.astro": "./overrides/Sidebar.astro",
     "./schema": "./schema.ts",
     "./package.json": "./package.json"

@@ -11,6 +11,22 @@ import {
 import { throwPluginError } from './libs/plugin'
 import { vitePluginStarlightSidebarTopics } from './libs/vite'
 
+// Process topic items to handle auto-sidebar
+async function processTopicItems(items: any[]): Promise<any[]> {
+  const processedItems: any[] = []
+  
+  for (const item of items) {
+    if (typeof item === 'object' && 'autogenerate' in item) {
+      // Keep autogenerate structure for validation and allow middleware to process it
+      processedItems.push(item)
+    } else {
+      processedItems.push(item)
+    }
+  }
+  
+  return processedItems
+}
+
 export type {
   StarlightSidebarTopicsConfig,
   StarlightSidebarTopicsUserConfig,
@@ -44,7 +60,7 @@ export default function starlightSidebarTopicsPlugin(
   return {
     name: 'starlight-sidebar-topics',
     hooks: {
-      'config:setup'({ addIntegration, addRouteMiddleware, command, config: starlightConfig, updateConfig }) {
+      'config:setup': async ({ addIntegration, addRouteMiddleware, command, config: starlightConfig, updateConfig }) => {
         if (command !== 'dev' && command !== 'build') return
 
         if (starlightConfig.sidebar) {
@@ -53,14 +69,17 @@ export default function starlightSidebarTopicsPlugin(
             'Learn more about topic configuration at https://starlight-sidebar-topics.netlify.app/docs/configuration/',
           )
         }
-
-        addRouteMiddleware({ entrypoint: 'starlight-sidebar-topics/middleware', order: 'pre' })
+        
+        // Use middleware to handle auto-sidebar functionality
+        addRouteMiddleware({ entrypoint: 'starlight-sidebar-topics/libs/middlewareAutoSidebar', order: 'pre' })
 
         const sidebar: StarlightUserConfig['sidebar'] = []
 
         for (const [index, topic] of config.entries()) {
           if ('items' in topic) {
-            sidebar.push({ label: String(index), items: topic.items })
+            // Process auto-sidebar items
+            const processedItems = await processTopicItems(topic.items)
+            sidebar.push({ label: String(index), items: processedItems })
           }
         }
         updateConfig({
