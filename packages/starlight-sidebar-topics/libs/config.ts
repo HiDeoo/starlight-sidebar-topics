@@ -2,7 +2,7 @@ import type { StarlightUserConfig } from '@astrojs/starlight/types'
 import { z } from 'astro/zod'
 
 const sidebarTopicBadgeSchema = z.object({
-  text: z.union([z.string(), z.record(z.string())]),
+  text: z.union([z.string(), z.record(z.string(), z.string())]),
   variant: z.enum(['note', 'danger', 'success', 'caution', 'tip', 'default']).default('default'),
 })
 
@@ -28,7 +28,7 @@ const sidebarTopicBaseSchema = z.object({
    * The value can be a string, or for multilingual sites, an object with values for each different locale. When using
    * the object form, the keys must be BCP-47 tags (e.g. en, fr, or zh-CN).
    */
-  label: z.union([z.string(), z.record(z.string())]),
+  label: z.union([z.string(), z.record(z.string(), z.string())]),
   /**
    * The link to the topic’s content which an be a relative link to local files or the full URL of an external page.
    *
@@ -52,13 +52,13 @@ const sidebarTopicGroupSchema = sidebarTopicBaseSchema.extend({
    * The topic’s sidebar navigation items. This represents the sidebar displayed when the topic `link` page or any of
    * the pages configured in the `items` array is the current page.
    */
-  items: z.any().array() as z.Schema<NonNullable<StarlightUserConfig['sidebar']>>,
+  items: z.any().array() as z.ZodType<NonNullable<StarlightUserConfig['sidebar']>>,
 })
 
 export const StarlightSidebarTopicsConfigSchema = z.union([sidebarTopicGroupSchema, sidebarTopicLinkSchema]).array()
 
 export const StarlightSidebarTopicsOptionsSchema = z
-  .object({
+  .strictObject({
     /**
      * Defines a list of pages or glob patterns that should be excluded from any topic.
      *
@@ -76,10 +76,9 @@ export const StarlightSidebarTopicsOptionsSchema = z
      *
      * @default {}
      */
-    topics: z.record(z.array(z.string())).default({}),
+    topics: z.record(z.string(), z.array(z.string())).default({}),
   })
-  .strict()
-  .default({})
+  .prefault({})
 
 export type StarlightSidebarTopicsUserConfig = z.input<typeof StarlightSidebarTopicsConfigSchema>
 export type StarlightSidebarTopicsConfig = z.output<typeof StarlightSidebarTopicsConfigSchema>
