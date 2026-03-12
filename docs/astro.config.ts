@@ -75,10 +75,18 @@ export default defineConfig({
           },
         ),
       ],
-      social: {
-        blueSky: 'https://bsky.app/profile/hideoo.dev',
-        github: 'https://github.com/HiDeoo/starlight-sidebar-topics',
-      },
+      social: [
+        {
+          href: 'https://bsky.app/profile/hideoo.dev',
+          icon: 'blueSky',
+          label: 'Bluesky',
+        },
+        {
+          href: 'https://github.com/HiDeoo/starlight-sidebar-topics',
+          icon: 'github',
+          label: 'GitHub',
+        },
+      ],
       title: 'Starlight Sidebar Topics',
       locales:
         process.env['NODE_ENV'] === 'test'

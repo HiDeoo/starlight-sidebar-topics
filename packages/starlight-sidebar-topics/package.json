@@ -18,19 +18,19 @@
     "lint": "eslint . --cache --max-warnings=0"
   },
   "dependencies": {
-    "picomatch": "^4.0.2"
+    "picomatch": "^4.0.3"
   },
   "devDependencies": {
-    "@playwright/test": "^1.49.1",
-    "@types/picomatch": "^3.0.2"
+    "@playwright/test": "^1.58.2",
+    "@types/picomatch": "^4.0.2"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.32.0"
+    "@astrojs/starlight": ">=0.38.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.12.0"
   },
-  "packageManager": "pnpm@9.12.1",
+  "packageManager": "pnpm@10.32.1",
   "publishConfig": {
     "access": "public"
   },
