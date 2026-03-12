@@ -1,5 +1,15 @@
 # starlight-sidebar-topics
 
+## 0.7.0
+
+### Minor Changes
+
+- [#54](https://github.com/HiDeoo/starlight-sidebar-topics/pull/54) [`74e2a1a`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/74e2a1a8272565cc52730fe1ec4bb989ab2d914e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for Astro v6, drops support for Astro v5.
+
+  ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now `0.38.0`.
+
+  Please follow the [upgrade guide](https://github.com/withastro/starlight/releases/tag/%40astrojs%2Fstarlight%400.38.0) to update your project.
+
 ## 0.6.2
 
 ### Patch Changes
