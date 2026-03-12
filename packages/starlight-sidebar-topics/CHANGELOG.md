@@ -1,5 +1,11 @@
 # starlight-sidebar-topics
 
+## 0.7.1
+
+### Patch Changes
+
+- [#56](https://github.com/HiDeoo/starlight-sidebar-topics/pull/56) [`38406a1`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/38406a10f9a67d68a801cfdcfb140f446c9a2996) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improves the error message logged when the plugin configuration is invalid.
+
 ## 0.7.0
 
 ### Minor Changes
