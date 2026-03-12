@@ -1,6 +1,7 @@
 /// <reference path="./locals.d.ts" />
 
 import type { StarlightPlugin, StarlightUserConfig } from '@astrojs/starlight/types'
+import { z } from 'astro/zod'
 
 import {
   StarlightSidebarTopicsConfigSchema,
@@ -34,7 +35,10 @@ export default function starlightSidebarTopicsPlugin(
 
   if (!parsedOptions.success) {
     throwPluginError(
-      `The provided plugin options are invalid.\n${parsedOptions.error.issues.map((issue) => issue.message).join('\n')}`,
+      `Invalid starlight-sidebar-topics configuration:
+
+${z.prettifyError(parsedOptions.error)}
+`,
     )
   }
 
