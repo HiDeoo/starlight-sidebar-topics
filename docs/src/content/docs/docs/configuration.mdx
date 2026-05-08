@@ -51,7 +51,10 @@ starlightSidebarTopics([
         label: 'Start Here',
         items: ['guides/concepts', 'guides/courses'],
       },
-      { label: 'Recipes', autogenerate: { directory: 'guides/recipes' } },
+      {
+        label: 'Recipes',
+        items: [{ autogenerate: { directory: 'guides/recipes' } }],
+      },
     ],
   },
   // A topic redirecting to the Starlight documentation.
@@ -115,7 +118,7 @@ This represents the sidebar displayed when the topic [`link`](#link) page or any
 
 This option accepts the same configuration as the [Starlight `sidebar` configuration](https://starlight.astro.build/reference/configuration/#sidebar).
 
-```js {5-11}
+```js {5-14}
 starlightSidebarTopics([
   {
     label: 'Guides',
@@ -125,7 +128,10 @@ starlightSidebarTopics([
         label: 'Start Here',
         items: ['guides/concepts', 'guides/courses'],
       },
-      { label: 'Recipes', autogenerate: { directory: 'guides/recipes' } },
+      {
+        label: 'Recipes',
+        items: [{ autogenerate: { directory: 'guides/recipes' } }],
+      },
     ],
   },
 ])
@@ -145,7 +151,12 @@ starlightSidebarTopics([
     label: 'Guides',
     link: '/guides/',
     id: 'guides',
-    items: [{ label: 'Start Here', autogenerate: { directory: 'guides' } }],
+    items: [
+      {
+        label: 'Start Here',
+        items: [{ autogenerate: { directory: 'guides' } }],
+      },
+    ],
   },
 ])
 ```
