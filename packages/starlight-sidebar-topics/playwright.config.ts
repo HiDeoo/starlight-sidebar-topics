@@ -1,11 +1,18 @@
 import { defineConfig, devices } from '@playwright/test'
 
+const isCI = !!process.env['CI']
+
 export default defineConfig({
-  forbidOnly: !!process.env['CI'],
+  forbidOnly: isCI,
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], headless: true },
+      use: {
+        ...devices['Desktop Chrome'],
+        // Re-use system Chrome on CI to avoid re-installing it on every run.
+        channel: isCI ? 'chrome' : undefined,
+        headless: true,
+      },
     },
   ],
   use: {
@@ -16,7 +23,7 @@ export default defineConfig({
       command: 'pnpm run build --mode test && pnpm run preview',
       cwd: '../../docs',
       env: { NODE_ENV: 'test' },
-      reuseExistingServer: !process.env['CI'],
+      reuseExistingServer: !isCI,
       url: 'http://localhost:4321',
     },
   ],
