@@ -5,3 +5,8 @@
   justify-content: center;
   line-height: var(--size);
 }
+
+/* TODO(trueberryless/HiDeoo): Remove example */
+.starlight-sidebar-topics-current .starlight-sidebar-topics-icon {
+    background: white;
+}
