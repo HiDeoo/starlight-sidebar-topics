@@ -26,6 +26,7 @@ test('uses topic sidebars', async ({ demoPage, docPage }) => {
     'Start Here',
     'Getting Started',
     'Configuration',
+    'Customization',
     'Guides',
     'Unlisted Pages',
     'Excluded Pages',
