@@ -35,7 +35,7 @@ export default defineConfig({
               link: '/docs/getting-started/',
               icon: 'open-book',
               items: [
-                { label: 'Start Here', items: ['docs/getting-started', 'docs/configuration'] },
+                { label: 'Start Here', items: ['docs/getting-started', 'docs/configuration', 'docs/customization'] },
                 { label: 'Guides', autogenerate: { directory: 'docs/guides' } },
                 { label: 'Resources', items: [{ label: 'Plugins and Tools', slug: 'docs/resources/starlight' }] },
               ],

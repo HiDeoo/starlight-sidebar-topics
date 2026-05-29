@@ -1,0 +1,25 @@
+---
+title: Customization
+---
+
+## Custom CSS
+
+To customize the styles applied to your Starlight sidebar when using `starlight-sidebar-topics`, you can provide additional CSS files to modify or extend Starlight and `starlight-sidebar-topics` default styles.
+
+[Learn more about custom CSS in the Starlight documentation.](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles)
+
+## Cascade layers
+
+Like Starlight, `starlight-sidebar-topics` uses [cascade layers](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) internally to manage the order of its styles.
+This ensures a predictable CSS order and allows for simpler overrides.
+Any custom unlayered CSS will override the default styles from Starlight and `starlight-sidebar-topics`.
+
+If you are using cascade layers, you can use [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) in your [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to define the order of precedence for different layers relative to styles from the `starlight` and `sidebar-topics` layers:
+
+```css "starlight" "sidebar-topics"
+/* src/styles/custom.css */
+@layer my-reset, starlight, sidebar-topics, my-overrides;
+```
+
+The example above defines a custom layer named `my-reset`, applied before all Starlight and `starlight-sidebar-topics` layers, and another named `my-overrides`, applied after all Starlight and `starlight-sidebar-topics` layers.
+Any styles in the `my-overrides` layer would take precedence over Starlight and `starlight-sidebar-topics` styles, but Starlight or `starlight-sidebar-topics` could still change styles set in the `my-reset` layer.
