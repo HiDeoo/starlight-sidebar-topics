@@ -36,9 +36,15 @@ export const onRequest = defineRouteMiddleware((context) => {
         return
       }
 
+      let extraHint = ''
+
+      if (entry.data.sidebar.hidden) {
+        extraHint = 'remove `sidebar.hidden: true` from the page frontmatter, '
+      }
+
       throwPluginError(
         `Failed to find the topic for the \`${id}\` page.`,
-        `Either include this page in the sidebar configuration of the desired topic using the \`items\` property, associate an unlisted page with a topic using the \`topic\` frontmatter property or the \`topics\` option, or exclude this page from any topic using the \`exclude\` option.
+        `Either ${extraHint}include this page in the sidebar configuration of the desired topic using the \`items\` property, associate an unlisted page with a topic using the \`topic\` frontmatter property or the \`topics\` option, or exclude this page from any topic using the \`exclude\` option.
 
 Learn more in the following guides:
 
