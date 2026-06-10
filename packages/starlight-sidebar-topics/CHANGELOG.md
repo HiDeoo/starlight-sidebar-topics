@@ -1,5 +1,11 @@
 # starlight-sidebar-topics
 
+## 0.7.2
+
+### Patch Changes
+
+- [#69](https://github.com/HiDeoo/starlight-sidebar-topics/pull/69) [`c7a0535`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/c7a0535c826bfad405f3230cda9a35dc94ed7109) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improves the topic lookup error message for pages hidden from the sidebar using the `sidebar.hidden` frontmatter property.
+
 ## 0.7.1
 
 ### Patch Changes
