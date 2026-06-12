@@ -1,5 +1,16 @@
 import type { StarlightUserConfig } from '@astrojs/starlight/types'
+import type { AstroBuiltinAttributes } from 'astro'
+import type { HTMLAttributes } from 'astro/types'
 import { z } from 'astro/zod'
+
+// HTML attributes that can be added to an anchor element, validated as
+// `Record<string, string | number | boolean | null | undefined>` but typed as `HTMLAttributes<'a'>` for user
+// convenience.
+const linkHTMLAttributesSchema = z.record(
+  z.string(),
+  z.union([z.string(), z.number(), z.boolean(), z.undefined(), z.null()]),
+) as z.ZodType<LinkHTMLAttributes, LinkHTMLAttributes>
+export type LinkHTMLAttributes = Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children' | 'href'>
 
 const sidebarTopicBadgeSchema = z.object({
   text: z.union([z.string(), z.record(z.string(), z.string())]),
@@ -7,6 +18,8 @@ const sidebarTopicBadgeSchema = z.object({
 })
 
 const sidebarTopicBaseSchema = z.object({
+  /** Optional HTML attributes to add to the topic link. */
+  attrs: linkHTMLAttributesSchema.default({}),
   /**
    * An optional badge to display next to the topic label.
    *

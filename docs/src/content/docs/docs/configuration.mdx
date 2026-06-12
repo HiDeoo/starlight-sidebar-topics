@@ -216,6 +216,24 @@ starlightSidebarTopics([
 ])
 ```
 
+### `attrs`
+
+**type:** `Omit<HTMLAttributes<'a'>, 'children' | 'href'>`
+
+The optional HTML attributes to add to the topic link.
+
+```js {5-7}
+starlightSidebarTopics([
+  {
+    label: 'Starlight docs',
+    link: 'https://starlight.astro.build',
+    attrs: {
+      target: '_blank',
+    },
+  },
+])
+```
+
 ## Plugin configuration
 
 The Starlight Sidebar Topics plugin accepts an optional configuration object as the second argument.

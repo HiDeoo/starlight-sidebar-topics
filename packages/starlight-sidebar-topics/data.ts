@@ -1,6 +1,6 @@
 import type { StarlightIcon } from '@astrojs/starlight/types'
 
-import type { SidebarTopicBadge } from './libs/config'
+import type { LinkHTMLAttributes, SidebarTopicBadge } from './libs/config'
 
 export interface StarlightSidebarTopicsRouteData {
   /**
@@ -11,6 +11,10 @@ export interface StarlightSidebarTopicsRouteData {
    * A list of all configured topics.
    */
   topics: {
+    /**
+     * The optional HTML attributes of the topic link.
+     */
+    attrs?: LinkHTMLAttributes
     /**
      * The optional badge associated with the topic.
      */

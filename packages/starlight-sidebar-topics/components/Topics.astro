@@ -6,23 +6,31 @@ const { topics } = Astro.locals.starlightSidebarTopics
 
 <ul class="starlight-sidebar-topics">
   {
-    topics.map((topic) => (
-      <li>
-        <a href={topic.link} class:list={{ 'starlight-sidebar-topics-current': topic.isCurrent }}>
-          {topic.icon && (
-            <div class="starlight-sidebar-topics-icon">
-              <Icon name={topic.icon} />
-            </div>
-          )}
-          <div>
-            {topic.label}
-            {topic.badge && (
-              <Badge class="starlight-sidebar-topics-badge" text={topic.badge.text} variant={topic.badge.variant} />
+    topics.map((topic) => {
+      const { class: className, ...attrs } = topic.attrs || {}
+
+      return (
+        <li>
+          <a
+            {...attrs}
+            href={topic.link}
+            class:list={[{ 'starlight-sidebar-topics-current': topic.isCurrent }, className]}
+          >
+            {topic.icon && (
+              <div class="starlight-sidebar-topics-icon">
+                <Icon name={topic.icon} />
+              </div>
             )}
-          </div>
-        </a>
-      </li>
-    ))
+            <div>
+              {topic.label}
+              {topic.badge && (
+                <Badge class="starlight-sidebar-topics-badge" text={topic.badge.text} variant={topic.badge.variant} />
+              )}
+            </div>
+          </a>
+        </li>
+      )
+    })
   }
 </ul>
 

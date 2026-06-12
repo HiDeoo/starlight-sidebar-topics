@@ -65,6 +65,7 @@ export default defineConfig({
               label: 'Starlight Docs',
               link: 'https://starlight.astro.build/',
               icon: 'starlight',
+              attrs: { 'data-testid': 'test-attrs' },
             },
           ],
           {

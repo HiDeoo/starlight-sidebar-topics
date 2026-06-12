@@ -81,6 +81,7 @@ function getRouteData(
       const isLinkTopic = topic.type === 'link'
 
       const topicRouteData: StarlightSidebarTopicsRouteData['topics'][number] = {
+        attrs: topic.attrs,
         isCurrent:
           isLinkTopic || !currentTopic
             ? false

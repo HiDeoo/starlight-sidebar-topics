@@ -31,3 +31,9 @@ test('links to topics', async ({ demoPage }) => {
     'https://starlight.astro.build/',
   ])
 })
+
+test('adds attributes to topic links', async ({ demoPage }) => {
+  await demoPage.goto()
+
+  await expect(demoPage.page.getByTestId('test-attrs')).toHaveAttribute('href', 'https://starlight.astro.build/')
+})
