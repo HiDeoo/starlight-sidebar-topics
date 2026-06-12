@@ -1,5 +1,11 @@
 # starlight-sidebar-topics
 
+## 0.8.0
+
+### Minor Changes
+
+- [#72](https://github.com/HiDeoo/starlight-sidebar-topics/pull/72) [`0afdff2`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/0afdff2110e85132777f32cef2073b970ae2407f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for defining HTML attributes on topic links using the `attrs` topic option.
+
 ## 0.7.2
 
 ### Patch Changes
