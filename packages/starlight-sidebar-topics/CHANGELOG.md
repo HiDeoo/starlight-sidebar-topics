@@ -1,5 +1,19 @@
 # starlight-sidebar-topics
 
+## 0.9.0
+
+### Minor Changes
+
+- [#76](https://github.com/HiDeoo/starlight-sidebar-topics/pull/76) [`1b1644d`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/1b1644d900da29c3da1c98faed0c980e2b429482) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now version `0.42.0`.
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+- [#76](https://github.com/HiDeoo/starlight-sidebar-topics/pull/76) [`1b1644d`](https://github.com/HiDeoo/starlight-sidebar-topics/commit/1b1644d900da29c3da1c98faed0c980e2b429482) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Distributes package as JavaScript files with dedicated type declaration files instead of TypeScript source files.
+
 ## 0.8.0
 
 ### Minor Changes
