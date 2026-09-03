@@ -37,6 +37,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build package
+        run: pnpm build
+        working-directory: packages/starlight-sidebar-topics
+
       - name: Generates docs TypeScript types
         run: pnpm astro sync
         working-directory: docs

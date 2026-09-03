@@ -1,7 +1,0 @@
-.eslintcache
-eslint.config.mjs
-playwright.config.ts
-test-results/
-tests/
-tsconfig.json
-tsconfig.tsbuildinfo

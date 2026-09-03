@@ -21,10 +21,12 @@
     "eslint": "^9.39.4",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
+    "publint": "^0.3.24",
+    "tsdown": "^0.22.14",
     "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": "^22.18.0 || >=24.11.0"
   },
   "packageManager": "pnpm@11.22.0",
   "private": true,
