@@ -24,7 +24,10 @@ const { topics } = Astro.locals.starlightSidebarTopics
             <div>
               {topic.label}
               {topic.badge && (
-                <Badge class="starlight-sidebar-topics-badge" text={topic.badge.text} variant={topic.badge.variant} />
+                <>
+                  {' '}
+                  <Badge class="starlight-sidebar-topics-badge" text={topic.badge.text} variant={topic.badge.variant} />
+                </>
               )}
             </div>
           </a>

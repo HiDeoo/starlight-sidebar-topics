@@ -1,4 +1,4 @@
-/// <reference path="./locals.d.ts" />
+import './global'
 
 import type { StarlightPlugin, StarlightUserConfig } from '@astrojs/starlight/types'
 import { z } from 'astro/zod'
@@ -78,8 +78,8 @@ ${z.prettifyError(parsedOptions.error)}
         addIntegration({
           name: 'starlight-sidebar-topics-integration',
           hooks: {
-            'astro:config:setup': ({ updateConfig }) => {
-              updateConfig({ vite: { plugins: [vitePluginStarlightSidebarTopics(config, options)] } })
+            'astro:config:setup': ({ config: astroConfig, updateConfig }) => {
+              updateConfig({ vite: { plugins: [vitePluginStarlightSidebarTopics(config, options, astroConfig.i18n)] } })
             },
           },
         })

@@ -1,10 +1,8 @@
 import type { APIContext } from 'astro'
 import { AstroError } from 'astro/errors'
-import starlightConfig from 'virtual:starlight/user-config'
+import context from 'virtual:starlight-sidebar-topics/context'
 
 import { stripTrailingSlash } from './pathname'
-
-const defaultLang = starlightConfig.defaultLocale.lang ?? starlightConfig.defaultLocale.locale ?? 'en'
 
 export function getLocalizedSlug(slug: string, locale: string | undefined): string {
   const slugLocale = getLocaleFromSlug(slug)
@@ -20,9 +18,8 @@ export function getLocalizedSlug(slug: string, locale: string | undefined): stri
 }
 
 export function getLocaleFromSlug(slug: string): string | undefined {
-  const locales = Object.keys(starlightConfig.locales ?? {})
   const baseSegment = slug.split('/')[0]
-  return baseSegment && locales.includes(baseSegment) ? baseSegment : undefined
+  return baseSegment && context.locales.includes(baseSegment) ? baseSegment : undefined
 }
 
 export function getTranslation(
@@ -31,11 +28,11 @@ export function getTranslation(
   link: string,
   description: string,
 ) {
-  const defaultTranslation = translations[defaultLang]
+  const defaultTranslation = translations[context.defaultLang]
 
   if (!defaultTranslation) {
     throw new AstroError(
-      `The ${description} for "${link}" must have a key for the default language "${defaultLang}".`,
+      `The ${description} for "${link}" must have a key for the default language "${context.defaultLang}".`,
       'Update the Starlight config to include a topic label for the default language.',
     )
   }

@@ -36,7 +36,7 @@ export default defineConfig({
               icon: 'open-book',
               items: [
                 { label: 'Start Here', items: ['docs/getting-started', 'docs/configuration'] },
-                { label: 'Guides', autogenerate: { directory: 'docs/guides' } },
+                { label: 'Guides', items: [{ autogenerate: { directory: 'docs/guides' } }] },
                 { label: 'Resources', items: [{ label: 'Plugins and Tools', slug: 'docs/resources/starlight' }] },
               ],
             },
@@ -49,9 +49,9 @@ export default defineConfig({
               link: '/demo/',
               icon: 'puzzle',
               items: [
-                { label: 'API', autogenerate: { directory: 'demo/api' } },
-                { label: 'Components', autogenerate: { directory: 'demo/components' } },
-                { label: 'Commands', autogenerate: { directory: 'demo/commands' }, collapsed: true },
+                { label: 'API', items: [{ autogenerate: { directory: 'demo/api' } }] },
+                { label: 'Components', items: [{ autogenerate: { directory: 'demo/components' } }] },
+                { label: 'Commands', items: [{ autogenerate: { directory: 'demo/commands' } }], collapsed: true },
               ],
               badge: {
                 text: {
