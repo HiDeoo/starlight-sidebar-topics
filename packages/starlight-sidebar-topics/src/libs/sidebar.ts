@@ -25,7 +25,7 @@ export function getCurrentTopic(
   const currentSidebarTopic = getCurrentSidebarTopic(sidebar)
   if (!currentSidebarTopic) return
 
-  const currentTopicConfig = config[Number.parseInt(currentSidebarTopic.label, 10)]
+  const currentTopicConfig = config[Math.trunc(Number(currentSidebarTopic.label))]
   if (!currentTopicConfig) return
 
   return { config: currentTopicConfig, sidebar: currentSidebarTopic.entries }
@@ -52,19 +52,23 @@ export function isTopicLastPage(sidebar: SidebarEntry[], currentSlug: string): b
 }
 
 function getSidebarFirstPage(sidebar: SidebarEntry[]) {
-  const entry = sidebar[0]
-  if (!entry) return
-  if (entry.type === 'link') return entry
+  let entry: SidebarEntry | undefined = sidebar[0]
 
-  return getSidebarFirstPage(entry.entries)
+  while (entry?.type === 'group') {
+    entry = entry.entries[0]
+  }
+
+  return entry
 }
 
 function getSidebarLastPage(sidebar: SidebarEntry[]) {
-  const entry = sidebar.at(-1)
-  if (!entry) return
-  if (entry.type === 'link') return entry
+  let entry = sidebar.at(-1)
 
-  return getSidebarLastPage(entry.entries)
+  while (entry?.type === 'group') {
+    entry = entry.entries.at(-1)
+  }
+
+  return entry
 }
 
 function getTopicFromSlug(
@@ -83,9 +87,9 @@ function getTopicFromSlug(
     if (topic.type === 'group') groupTopicIndex++
 
     if (
+      groupTopicIndex !== -1 &&
       !absoluteLinkRegex.test(topic.link) &&
-      arePathnamesEqual(getLocalizedSlug(stripLeadingAndTrailingSlashes(topic.link), slugLocale), slug) &&
-      groupTopicIndex !== -1
+      arePathnamesEqual(getLocalizedSlug(stripLeadingAndTrailingSlashes(topic.link), slugLocale), slug)
     ) {
       const sidebarTopic = sidebar[groupTopicIndex]
 
