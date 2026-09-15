@@ -65,7 +65,8 @@ const sidebarTopicGroupSchema = sidebarTopicBaseSchema.extend({
    * The topic’s sidebar navigation items. This represents the sidebar displayed when the topic `link` page or any of
    * the pages configured in the `items` array is the current page.
    */
-  items: z.custom<NonNullable<StarlightUserConfig['sidebar']>[number]>().array(),
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  items: z.any().array() as z.ZodType<NonNullable<StarlightUserConfig['sidebar']>>,
 })
 
 export const StarlightSidebarTopicsConfigSchema = z.union([sidebarTopicGroupSchema, sidebarTopicLinkSchema]).array()
