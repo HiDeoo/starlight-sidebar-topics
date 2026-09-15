@@ -36,11 +36,7 @@ export const onRequest = defineRouteMiddleware((context) => {
         return
       }
 
-      let extraHint = ''
-
-      if (entry.data.sidebar.hidden) {
-        extraHint = 'remove `sidebar.hidden: true` from the page frontmatter, '
-      }
+      const extraHint = entry.data.sidebar.hidden ? 'remove `sidebar.hidden: true` from the page frontmatter, ' : ''
 
       throwPluginError(
         `Failed to find the topic for the \`${id}\` page.`,

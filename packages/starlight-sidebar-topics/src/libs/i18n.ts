@@ -11,14 +11,14 @@ export function getLocalizedSlug(slug: string, locale: string | undefined): stri
   if (slugLocale === slug) return locale
 
   if (slugLocale) {
-    return stripTrailingSlash(slug.replace(`${slugLocale}/`, locale ? `${locale}/` : ''))
+    return stripTrailingSlash(slug.replace(`${slugLocale}/`, () => (locale ? `${locale}/` : '')))
   }
 
   return slug ? `${locale}/${slug}` : locale
 }
 
 export function getLocaleFromSlug(slug: string): string | undefined {
-  const baseSegment = slug.split('/')[0]
+  const baseSegment = slug.split('/', 1)[0]
   return baseSegment && context.locales.includes(baseSegment) ? baseSegment : undefined
 }
 
@@ -37,11 +37,7 @@ export function getTranslation(
     )
   }
 
-  let translation = defaultTranslation
-
-  if (currentLocale) {
-    translation = translations[currentLocale] ?? defaultTranslation
-  }
+  const translation = currentLocale ? (translations[currentLocale] ?? defaultTranslation) : defaultTranslation
 
   return translation
 }
